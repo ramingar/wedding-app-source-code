@@ -16,12 +16,12 @@
     }
 
     @font-face {
-        font-family: Tofino;
+        font-family: Tofino-book;
         src: url(./assets/fonts/tofino-personal/TofinoPersonal-Book.ttf);
     }
 
     #app {
-        font-family: 'Tofino', Helvetica, Arial, sans-serif;
+        font-family: 'Tofino-book', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
