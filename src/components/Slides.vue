@@ -1,5 +1,6 @@
 <template>
     <div>
+        <slides-card/>
         <slides-buttons/>
     </div>
 </template>
