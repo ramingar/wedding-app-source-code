@@ -1,13 +1,14 @@
 <template>
     <div class="absolute flex justify-center items-center h-100 w-100">
         <div class="br4 bg-white v-mid mb5 mb0-ns ml5-ns w-80 _h-70 _mw-70-xl _mh-65-special-1024-768 _mh-80-special-768-1024">
+
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "SlidesCard"
+        name: "SlideCard"
     }
 </script>
 

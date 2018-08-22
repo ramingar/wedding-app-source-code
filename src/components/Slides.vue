@@ -1,19 +1,19 @@
 <template>
     <div>
-        <slides-card/>
-        <slides-buttons/>
+        <slide-card/>
+        <slide-buttons/>
     </div>
 </template>
 
 <script>
-    import SlidesButtons from './SlidesComponent/SlidesButtons.vue'
-    import SlidesCard from './SlidesComponent/SlidesCard.vue'
+    import SlideButtons from './SlideComponent/SlideButtons.vue'
+    import SlideCard from './SlideComponent/SlideCard.vue'
 
     export default {
         name      : 'Slides',
         components: {
-            SlidesButtons,
-            SlidesCard
+            SlideButtons,
+            SlideCard
         }
     }
 </script>
