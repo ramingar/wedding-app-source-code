@@ -15,7 +15,7 @@
 <style scoped>
 
     .cardboard-button-background {
-        background-image: url(../../assets/imgs/cardboard-buttons-background.jpg);
+        background-image: url(../../assets/imgs/slide-component/cardboard-buttons-background.jpg);
     }
 
     .previous {

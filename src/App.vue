@@ -27,7 +27,7 @@
     }
 
     body {
-        background: url(./assets/imgs/corrugated_texture.jpg) no-repeat center center fixed;
+        background: url(./assets/imgs/slide-component/corrugated_texture.jpg) no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
