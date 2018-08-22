@@ -27,14 +27,26 @@
     }
 
     body {
-        background: url(./assets/imgs/slide-component/corrugated_texture.jpg) no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+        background-image: url(./assets/imgs/slide-component/corrugated_texture.jpg);
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        -webkit-background-size: auto;
+        -moz-background-size: auto;
+        -o-background-size: auto;
+        background-size: auto;
     }
 
     @media (min-width: 1024px) {
+        body {
+            background: url(./assets/imgs/slide-component/corrugated_texture-big.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    }
+
+    @media (min-height: 1024px) {
         body {
             background: url(./assets/imgs/slide-component/corrugated_texture-big.jpg) no-repeat center center fixed;
             -webkit-background-size: cover;
