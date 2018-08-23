@@ -1,10 +1,20 @@
 <template>
     <div class="absolute flex items-center justify-center h-100 w-100">
-        <div class="bg-white overflow-hidden br4 mh3 mb5 mb0-ns ml5-ns _w5_50 _w6_50-l h-75">
-            <div class="pa3 _h-40">
+        <div class="flex flex-column items-center bg-white overflow-hidden br4 mh3 mb5 mb0-ns ml5-ns _w5_50 h-75
+        _flex-row-mobile-landscape _w5_75-mobile-landscape
+        _h6_12-tablet-portrait
+        _flex-row-hd _w6_75-hd
+        _flex-row-fullhd _w7_6-fullhd">
+            <div class="pa3 _h-40 w-100
+            _h-65-mobile-landscape _w-50-mobile-landscape
+            _h-60-hd _w-50-hd
+            _h-60-fullhd _w-50-fullhd">
                 <slide-card-main/>
             </div>
-            <div class="pa3 f7">
+            <div class="pa3 ph4 f7
+            _w-50-mobile-landscape f8-mobile-landscape _pa0-mobile-landscape _pr4-mobile-landscape
+            _w-50-hd _pa0-hd _pr6-hd _f5-hd
+            _w-50-fullhd _pa0-fullhd _pr6-fullhd _f4-fullhd">
                 <slide-card-content/>
             </div>
         </div>
@@ -23,15 +33,3 @@
         }
     }
 </script>
-
-<style scoped>
-    ._w5_50 {
-        width: 24rem;
-    }
-
-    ._h-40 {
-        height: 40%;
-    }
-
-
-</style>
