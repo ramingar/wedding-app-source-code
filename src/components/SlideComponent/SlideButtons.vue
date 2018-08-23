@@ -14,6 +14,11 @@
 
 <style scoped>
 
+    .button-disabled {
+        border-color: black;
+        color: rgba(129, 100, 59, .4);
+    }
+
     .cardboard-button-background {
         background-image: url(../../assets/imgs/slide-component/cardboard-buttons-background.jpg);
     }
