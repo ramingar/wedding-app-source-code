@@ -1,14 +1,19 @@
 <template>
-    <div class="absolute flex bottom-0 justify-center w-100 w3-ns h-100-ns flex-column-ns">
-        <button class="b--dotted b--black w3 pa2 f2 tc cardboard-button-background">
-            <span class="db previous"></span>
-        </button>
-        <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background">
-            <span class="db menu"></span>
-        </button>
-        <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background">
-            <span class="db next"></span>
-        </button>
+    <div>
+        <div class="fixed top-0 right-0 f2 w2 h2 ma1 button">
+            <span class="db info"></span>
+        </div>
+        <div class="absolute flex bottom-0 justify-center w-100 w3-ns h-100-ns flex-column-ns">
+            <button class="b--dotted b--black w3 pa2 f2 tc cardboard-button-background button">
+                <span class="db previous"></span>
+            </button>
+            <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
+                <span class="db menu"></span>
+            </button>
+            <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
+                <span class="db next"></span>
+            </button>
+        </div>
     </div>
 </template>
 
@@ -29,13 +34,13 @@
         background-image: url(../../assets/imgs/slide-component/cardboard-buttons-background.jpg);
     }
 
-    .cardboard-button-background:hover {
+    .button:hover {
         cursor: pointer;
         color: rgba(27, 75, 36, 1);
         border-color: black;
     }
 
-    .cardboard-button-background:active span {
+    .button:active span {
         color: rgba(23, 134, 44, 1);
     }
 
@@ -70,6 +75,14 @@
         }
     }
 
+    .info {
+        font-family: 'PWSmallIcons';
+    }
+
+    .info:before {
+        content: 'j';
+    }
+
     .previous {
         font-family: 'PWSmallIcons';
     }
@@ -101,7 +114,7 @@
     }
 
     @media (min-width: 75rem) and (max-width: 86rem) and (min-height: 600px) {
-        .cardboard-button-background:hover span {
+        .button:hover span {
             -webkit-animation-name: hovered;
             -moz-animation-name: hovered;
             -o-animation-name: hovered;
@@ -122,7 +135,7 @@
     }
 
     @media (min-width: 86rem) and (min-height: 600px) {
-        .cardboard-button-background:hover span {
+        .button:hover span {
             -webkit-animation-name: hovered;
             -moz-animation-name: hovered;
             -o-animation-name: hovered;
