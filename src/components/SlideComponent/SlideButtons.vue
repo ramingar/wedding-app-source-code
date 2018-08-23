@@ -1,8 +1,14 @@
 <template>
     <div class="absolute flex bottom-0 justify-center w-100 w3-ns h-100-ns flex-column-ns">
-        <div class="b--dotted w3 pa2 f2 tc previous cardboard-button-background"></div>
-        <div class="b--dotted bt-0-ns _bl-0-s w3 pa2 f2 tc menu cardboard-button-background"></div>
-        <div class="b--dotted bt-0-ns _bl-0-s w3 pa2 f2 tc next cardboard-button-background"></div>
+        <button class="b--dotted b--black w3 pa2 f2 tc cardboard-button-background">
+            <span class="db previous"></span>
+        </button>
+        <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background">
+            <span class="db menu"></span>
+        </button>
+        <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background">
+            <span class="db next"></span>
+        </button>
     </div>
 </template>
 
@@ -21,6 +27,47 @@
 
     .cardboard-button-background {
         background-image: url(../../assets/imgs/slide-component/cardboard-buttons-background.jpg);
+    }
+
+    .cardboard-button-background:hover {
+        cursor: pointer;
+        color: rgba(27, 75, 36, 1);
+        border-color: black;
+    }
+
+    .cardboard-button-background:active span {
+        color: rgba(23, 134, 44, 1);
+    }
+
+    @keyframes hovered {
+        0% {
+            -webkit-transform: rotate(0) scale(1.4);
+            -moz-transform: rotate(0) scale(1.4);
+            -ms-transform: rotate(0) scale(1.4);
+            -o-transform: rotate(0) scale(1.4);
+            transform: rotate(0) scale(1.4);
+        }
+        33% {
+            -webkit-transform: rotate(-5deg) scale(1.4);
+            -moz-transform: rotate(-5deg) scale(1.4);
+            -ms-transform: rotate(-5deg) scale(1.4);
+            -o-transform: rotate(-5deg) scale(1.4);
+            transform: rotate(-5deg) scale(1.4);
+        }
+        66% {
+            -webkit-transform: rotate(5deg) scale(1.4);
+            -moz-transform: rotate(5deg) scale(1.4);
+            -ms-transform: rotate(5deg) scale(1.4);
+            -o-transform: rotate(5deg) scale(1.4);
+            transform: rotate(5deg) scale(1.4);
+        }
+        100% {
+            -webkit-transform: rotate(0) scale(1.4);
+            -moz-transform: rotate(0) scale(1.4);
+            -ms-transform: rotate(0) scale(1.4);
+            -o-transform: rotate(0) scale(1.4);
+            transform: rotate(0) scale(1.4);
+        }
     }
 
     .previous {
@@ -50,6 +97,48 @@
     @media (max-width: 480px) {
         ._bl-0-s {
             border-left: 0;
+        }
+    }
+
+    @media (min-width: 75rem) and (max-width: 86rem) and (min-height: 600px) {
+        .cardboard-button-background:hover span {
+            -webkit-animation-name: hovered;
+            -moz-animation-name: hovered;
+            -o-animation-name: hovered;
+            animation-name: hovered;
+
+            -webkit-animation-duration: .2s;
+            -moz-animation-duration: .2s;
+            -o-animation-duration: .2s;
+            animation-duration: .2s;
+            animation-iteration-count: 4;
+
+            -webkit-transform: rotate(0) scale(1.4);
+            -moz-transform: rotate(0) scale(1.4);
+            -ms-transform: rotate(0) scale(1.4);
+            -o-transform: rotate(0) scale(1.4);
+            transform: rotate(0) scale(1.4);
+        }
+    }
+
+    @media (min-width: 86rem) and (min-height: 600px) {
+        .cardboard-button-background:hover span {
+            -webkit-animation-name: hovered;
+            -moz-animation-name: hovered;
+            -o-animation-name: hovered;
+            animation-name: hovered;
+
+            -webkit-animation-duration: .2s;
+            -moz-animation-duration: .2s;
+            -o-animation-duration: .2s;
+            animation-duration: .2s;
+            animation-iteration-count: 4;
+
+            -webkit-transform: rotate(0) scale(1.4);
+            -moz-transform: rotate(0) scale(1.4);
+            -ms-transform: rotate(0) scale(1.4);
+            -o-transform: rotate(0) scale(1.4);
+            transform: rotate(0) scale(1.4);
         }
     }
 
