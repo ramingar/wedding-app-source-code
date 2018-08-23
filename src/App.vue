@@ -1,31 +1,59 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="app">
+        <router-view/>
     </div>
-    <router-view/>
-  </div>
 </template>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
+    @font-face {
+        font-family: KBREINDEERGAMES;
+        src: url(./assets/fonts/KBREINDEERGAMES.ttf);
+    }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+    @font-face {
+        font-family: PWSmallIcons;
+        src: url(./assets/fonts/PWSmallIcons.ttf);
+    }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+    @font-face {
+        font-family: Tofino-book;
+        src: url(./assets/fonts/tofino-personal/TofinoPersonal-Book.ttf);
+    }
+
+    #app {
+        font-family: 'Tofino-book', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+        background-image: url(./assets/imgs/slide-component/corrugated_texture.jpg);
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        -webkit-background-size: auto;
+        -moz-background-size: auto;
+        -o-background-size: auto;
+        background-size: auto;
+    }
+
+    @media (min-width: 1024px) {
+        body {
+            background: url(./assets/imgs/slide-component/corrugated_texture-big.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    }
+
+    @media (min-height: 1024px) {
+        body {
+            background: url(./assets/imgs/slide-component/corrugated_texture-big.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    }
+
 </style>
