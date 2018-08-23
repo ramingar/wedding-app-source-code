@@ -46,7 +46,7 @@
         }
     }
 
-    @media (min-height: 1024px) {
+    @media (min-height: 768px) {
         body {
             background: url(./assets/imgs/slide-component/corrugated_texture-big.jpg) no-repeat center center fixed;
             -webkit-background-size: cover;
