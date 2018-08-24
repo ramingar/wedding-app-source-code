@@ -1,10 +1,20 @@
 <template>
-    <div class="absolute flex justify-center items-center h-100 w-100">
-        <div class="flex flex-wrap justify-center items-center br4 bg-white v-mid mb5 mb0-ns ml5-ns w-80 _h-70 _mw-70-xl _mh-65-special-1024-768 _mh-80-special-768-1024">
-            <div class="br4 _h-35 _h50-landscape w-100 w-40-ns">
+    <div class="absolute flex items-center justify-center h-100 w-100">
+        <div class="flex flex-column items-center bg-white overflow-hidden br4 mh3 mb5 mb0-ns ml5-ns _w5_50 h-75
+        _flex-row-mobile-landscape _w5_75-mobile-landscape
+        _h6_12-tablet-portrait
+        _flex-row-hd _w6_75-hd
+        _flex-row-fullhd _w7_6-fullhd">
+            <div class="pa3 _h-40 w-100
+            _h-65-mobile-landscape _w-50-mobile-landscape
+            _h-60-hd _w-50-hd
+            _h-60-fullhd _w-50-fullhd">
                 <slide-card-main/>
             </div>
-            <div class="br4 ph3 pb3 f7 tc w-100 w-60-ns">
+            <div class="pa3 ph4 f7
+            _w-50-mobile-landscape f8-mobile-landscape _pa0-mobile-landscape _pr4-mobile-landscape
+            _w-50-hd _pa0-hd _pr6-hd _f5-hd
+            _w-50-fullhd _pa0-fullhd _pr6-fullhd _f4-fullhd">
                 <slide-card-content/>
             </div>
         </div>
@@ -23,42 +33,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-    ._h-35 {
-        height: 35%;
-    }
-
-    ._h-70 {
-        height: 70%;
-    }
-
-    @media (orientation: landscape) {
-        ._h50-landscape {
-            height: 50%;
-            max-height: 50%;
-        }
-    }
-
-    @media (min-width: 1025px) {
-        ._mw-70-xl {
-            max-width: 70%;
-        }
-    }
-
-    @media (width: 1024px) and (height: 768px) {
-        ._mh-65-special-1024-768 {
-            height: 65%;
-            max-height: 65%;
-        }
-    }
-
-    @media (width: 768px) and (height: 1024px) {
-        ._mh-80-special-768-1024 {
-            height: 80%;
-            max-height: 80%;
-        }
-    }
-
-</style>

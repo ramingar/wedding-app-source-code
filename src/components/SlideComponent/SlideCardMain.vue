@@ -1,7 +1,7 @@
 <template>
     <div class="h-100 w-100">
         <!--<div class="center background-image h-100 w-100 bg-center cover br--top br4"></div>-->
-        <div class="center background-image h-100 w-100 bg-center contain br--top br4 _rotate-355"></div>
+        <div class="background-image bg-center contain _rotate-355 h-100 w-100"></div>
         <div class="f7"></div>
     </div>
 </template>
