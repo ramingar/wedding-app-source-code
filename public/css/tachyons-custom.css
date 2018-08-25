@@ -6,6 +6,28 @@
     height: 40%;
 }
 
+._bottom-2_87 {
+    bottom: 3.6rem;
+}
+
+._h0 {
+    height: 0;
+}
+
+._w0 {
+    width: 0;
+}
+
+@media screen and (min-width: 30em) {
+    ._bottom-inherit-ns {
+        bottom: inherit;
+    }
+
+    ._left-2_87-ns {
+        left: 3.6rem;
+    }
+}
+
 @media (min-width: 530px) and (max-height: 440px) {
     ._w5_75-mobile-landscape {
         width: 28rem;
