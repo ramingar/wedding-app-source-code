@@ -11,14 +11,18 @@
         </div>
 
         <div class="absolute flex bottom-0 justify-center w-100 w3-ns h-100-ns flex-column-ns">
-            <button class="b--dotted b--black w3 pa2 f2 tc cardboard-button-background button">
+            <button v-bind:disabled="!this.previous()"
+                    :class="previousClasses"
+                    class="b--dotted b--black w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db previous"></span>
             </button>
             <button @click="toggleMenu"
                     class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db menu"></span>
             </button>
-            <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
+            <button v-bind:disabled="!this.previous()"
+                    :class="nextClasses"
+                    class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db next"></span>
             </button>
         </div>
@@ -51,7 +55,7 @@
         name: "SlideButtons",
 
         methods: {
-            ...mapGetters(['submenu']),
+            ...mapGetters(['submenu', 'next', 'previous']),
             ...mapActions(['hideSubmenu', 'showSubmenu']),
             hideMenu  : function () {
                 this.hideSubmenu()
@@ -72,6 +76,16 @@
                     flex: this.submenu(),
                     dn  : !this.submenu()
                 }
+            },
+            nextClasses() {
+                return {
+                    'button-disabled': !this.next()
+                }
+            },
+            previousClasses() {
+                return {
+                    'button-disabled': !this.previous()
+                }
             }
         }
     }
@@ -79,9 +93,17 @@
 
 <style scoped>
 
-    .button-disabled {
+    .button.button-disabled:hover {
+        cursor: default;
+    }
+
+    .button-disabled span {
         border-color: black;
         color: rgba(129, 100, 59, .4);
+        -webkit-animation-name: none;
+        -moz-animation-name: none;
+        -o-animation-name: none;
+        animation-name: none;
     }
 
     .transition-fast {
@@ -91,6 +113,7 @@
         transition: opacity .2s;
     }
 
+    /* used by Vue in a computed variable */
     #curtain.displayed {
         height: 100%;
         width: 100%;
@@ -109,6 +132,10 @@
 
     .button:active span {
         color: rgba(23, 134, 44, 1);
+    }
+
+    .button.button-disabled:active span {
+        color: rgba(129, 100, 59, .4);
     }
 
     @keyframes hovered {
@@ -239,6 +266,19 @@
             -o-transform: rotate(0) scale(1.4);
             transform: rotate(0) scale(1.4);
         }
+
+        .button.button-disabled:hover span {
+            -webkit-animation-name: none;
+            -moz-animation-name: none;
+            -o-animation-name: none;
+            animation-name: none;
+
+            -webkit-transform: none;
+            -moz-transform: none;
+            -ms-transform: none;
+            -o-transform: none;
+            transform: none;
+        }
     }
 
     @media (min-width: 86rem) and (min-height: 600px) {
@@ -259,6 +299,19 @@
             -ms-transform: rotate(0) scale(1.4);
             -o-transform: rotate(0) scale(1.4);
             transform: rotate(0) scale(1.4);
+        }
+
+        .button.button-disabled:hover span {
+            -webkit-animation-name: none;
+            -moz-animation-name: none;
+            -o-animation-name: none;
+            animation-name: none;
+
+            -webkit-transform: none;
+            -moz-transform: none;
+            -ms-transform: none;
+            -o-transform: none;
+            transform: none;
         }
     }
 
