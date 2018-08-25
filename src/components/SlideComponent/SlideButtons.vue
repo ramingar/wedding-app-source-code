@@ -93,6 +93,7 @@
 
 <style scoped>
 
+    /* used by Vue in a computed variable */
     .button.button-disabled:hover {
         cursor: default;
     }
