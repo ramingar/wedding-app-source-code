@@ -3,6 +3,10 @@
         <div class="fixed top-0 right-0 f2 w2 h2 ma1 button">
             <span class="db info"></span>
         </div>
+
+        <div id="curtain" class="absolute absolute--fill h1 w1 o-0" style="background-color: rgb(31, 57, 37);">
+        </div>
+
         <div class="absolute flex bottom-0 justify-center w-100 w3-ns h-100-ns flex-column-ns">
             <button class="b--dotted b--black w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db previous"></span>
@@ -12,6 +16,24 @@
             </button>
             <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db next"></span>
+            </button>
+        </div>
+
+        <div class="absolute flex bottom-0 justify-center flex-column-ns w-100 w3-ns h-100-ns _bottom-2_87 _bottom-inherit-ns _left-2_87-ns">
+            <button class="b--dotted b--black w3 pa2 f2 tc cardboard-button-background button">
+                <span class="db location"></span>
+            </button>
+            <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
+                <span class="db parking"></span>
+            </button>
+            <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
+                <span class="db calendar"></span>
+            </button>
+            <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
+                <span class="db present"></span>
+            </button>
+            <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
+                <span class="db contact"></span>
             </button>
         </div>
     </div>
@@ -28,6 +50,19 @@
     .button-disabled {
         border-color: black;
         color: rgba(129, 100, 59, .4);
+    }
+
+    #curtain {
+        -webkit-transition: opacity .1s;
+        -moz-transition: opacity .1s;
+        -o-transition: opacity .1s;
+        transition: opacity .1s;
+    }
+
+    #curtain.displayed {
+        height: 100%;
+        width: 100%;
+        opacity: .8;
     }
 
     .cardboard-button-background {
@@ -83,6 +118,46 @@
         content: 'j';
     }
 
+    .location {
+        font-family: 'PWSmallIcons';
+    }
+
+    .location:before {
+        content: '-';
+    }
+
+    .parking {
+        font-family: 'PWSmallIcons';
+    }
+
+    .parking:before {
+        content: '¨';
+    }
+
+    .calendar {
+        font-family: 'PWSmallIcons';
+    }
+
+    .calendar:before {
+        content: '(';
+    }
+
+    .present {
+        font-family: 'PWSmallIcons';
+    }
+
+    .present:before {
+        content: '5';
+    }
+
+    .contact {
+        font-family: 'PWSmallIcons';
+    }
+
+    .contact:before {
+        content: 'A';
+    }
+
     .previous {
         font-family: 'PWSmallIcons';
     }
@@ -107,7 +182,7 @@
         content: '2';
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 30em) {
         ._bl-0-s {
             border-left: 0;
         }
