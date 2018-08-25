@@ -7,7 +7,7 @@
         <div id="curtain"
              @click="hideMenu"
              :class="curtainClasses"
-             class="transition-fast absolute absolute--fill h0 w0 o-0" style="background-color: rgb(31, 57, 37);">
+             class="transition-fast absolute absolute--fill _h0 _w0 o-0" style="background-color: rgb(31, 57, 37);">
         </div>
 
         <div class="absolute flex bottom-0 justify-center w-100 w3-ns h-100-ns flex-column-ns">

@@ -10,6 +10,14 @@
     bottom: 3.6rem;
 }
 
+._h0 {
+    height: 0;
+}
+
+._w0 {
+    width: 0;
+}
+
 @media screen and (min-width: 30em) {
     ._bottom-inherit-ns {
         bottom: inherit;
