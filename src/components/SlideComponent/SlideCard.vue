@@ -12,9 +12,9 @@
                 <slide-card-main/>
             </div>
             <div class="pa3 ph4 f7
-            _w-50-mobile-landscape f8-mobile-landscape _pa0-mobile-landscape _pr4-mobile-landscape
-            _w-50-hd _pa0-hd _pr6-hd _f5-hd
-            _w-50-fullhd _pa0-fullhd _pr6-fullhd _f4-fullhd">
+            _w-50-mobile-landscape f8-mobile-landscape _pr4-mobile-landscape
+            _w-50-hd _pr4_50-hd _f5-hd
+            _w-50-fullhd _pr4_50-fullhd _f4-fullhd">
                 <slide-card-content/>
             </div>
         </div>
