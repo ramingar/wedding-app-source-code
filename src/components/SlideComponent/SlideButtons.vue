@@ -4,14 +4,18 @@
             <span class="db info"></span>
         </div>
 
-        <div id="curtain" class="absolute absolute--fill h1 w1 o-0" style="background-color: rgb(31, 57, 37);">
+        <div id="curtain"
+             @click="hideMenu"
+             :class="curtainClasses"
+             class="transition-fast absolute absolute--fill h0 w0 o-0" style="background-color: rgb(31, 57, 37);">
         </div>
 
         <div class="absolute flex bottom-0 justify-center w-100 w3-ns h-100-ns flex-column-ns">
             <button class="b--dotted b--black w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db previous"></span>
             </button>
-            <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
+            <button @click="toggleMenu"
+                    class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db menu"></span>
             </button>
             <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
@@ -19,7 +23,8 @@
             </button>
         </div>
 
-        <div class="absolute flex bottom-0 justify-center flex-column-ns w-100 w3-ns h-100-ns _bottom-2_87 _bottom-inherit-ns _left-2_87-ns">
+        <div :class="submenuClasses"
+             class="transition-fast absolute bottom-0 justify-center flex-column-ns w-100 w3-ns h-100-ns _bottom-2_87 _bottom-inherit-ns _left-2_87-ns">
             <button class="b--dotted b--black w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db location"></span>
             </button>
@@ -40,8 +45,35 @@
 </template>
 
 <script>
+    import {mapGetters, mapActions} from 'vuex'
+
     export default {
-        name: "SlideButtons"
+        name: "SlideButtons",
+
+        methods: {
+            ...mapGetters(['submenu']),
+            ...mapActions(['hideSubmenu', 'showSubmenu']),
+            hideMenu  : function () {
+                this.hideSubmenu()
+            },
+            toggleMenu: function () {
+                this.submenu() ? this.hideSubmenu() : this.showSubmenu()
+            }
+        },
+
+        computed: {
+            curtainClasses() {
+                return {
+                    displayed: this.submenu()
+                }
+            },
+            submenuClasses() {
+                return {
+                    flex: this.submenu(),
+                    dn  : !this.submenu()
+                }
+            }
+        }
     }
 </script>
 
@@ -52,11 +84,11 @@
         color: rgba(129, 100, 59, .4);
     }
 
-    #curtain {
-        -webkit-transition: opacity .1s;
-        -moz-transition: opacity .1s;
-        -o-transition: opacity .1s;
-        transition: opacity .1s;
+    .transition-fast {
+        -webkit-transition: opacity .2s;
+        -moz-transition: opacity .2s;
+        -o-transition: opacity .2s;
+        transition: opacity .2s;
     }
 
     #curtain.displayed {
