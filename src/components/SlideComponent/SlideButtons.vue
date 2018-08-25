@@ -98,6 +98,10 @@
         cursor: default;
     }
 
+    .button {
+        color: black;
+    }
+
     .button-disabled span {
         border-color: black;
         color: rgba(129, 100, 59, .4);
