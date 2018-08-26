@@ -14,13 +14,13 @@
         name: "SlideCardMain",
 
         methods: {
-            ...mapGetters(['defaultCardImage']),
+            ...mapGetters(['cardImage']),
         },
 
         computed: {
             image() {
                 return {
-                    'background-image': `url(/img/cards/${this.defaultCardImage()})`
+                    'background-image': `url(/img/cards/${this.cardImage()})`
                 }
             }
         }

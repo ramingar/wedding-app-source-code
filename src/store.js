@@ -1,18 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import sections from './sectionStore'
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        submenu         : false,
-        next            : false,
-        previous        : false,
-        defaultCardText : '<p>Lo siento, pero no has introducido la dirección correctamente. ' +
-        'Si quieres acceder a la aplicación cargada para tu perfil, escribe en tu navegador la url ' +
-        'que te indicamos en la tarjeta de la invitación. Muchas gracias.</p>',
-        defaultCardTitle: '¡Ups, algo ha fallado!',
-        defaultCardImage: '404.jpg'
+        submenu  : false,
+        next     : false,
+        previous : false,
+        cardText : sections.default.text,
+        cardTitle: sections.default.title,
+        cardImage: sections.default.image,
+        sections : sections
     },
 
     mutations: {
@@ -68,11 +69,11 @@ export default new Vuex.Store({
     },
 
     getters: {
-        submenu         : (state) => state.submenu,
-        next            : (state) => state.next,
-        previous        : (state) => state.previous,
-        defaultCardText : (state) => state.defaultCardText,
-        defaultCardTitle: (state) => state.defaultCardTitle,
-        defaultCardImage: (state) => state.defaultCardImage
+        submenu  : (state) => state.submenu,
+        next     : (state) => state.next,
+        previous : (state) => state.previous,
+        cardText : (state) => state.cardText,
+        cardTitle: (state) => state.cardTitle,
+        cardImage: (state) => state.cardImage
     }
 })

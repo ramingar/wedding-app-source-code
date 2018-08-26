@@ -11,14 +11,14 @@
     export default {
         name    : "SlideCardContent",
         methods : {
-            ...mapGetters(['defaultCardText', 'defaultCardTitle'])
+            ...mapGetters(['cardText', 'cardTitle'])
         },
         computed: {
             title() {
-                return this.defaultCardTitle()
+                return this.cardTitle()
             },
             text() {
-                return this.defaultCardText()
+                return this.cardText()
             }
         }
     }
