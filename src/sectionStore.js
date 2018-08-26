@@ -27,7 +27,7 @@ const sectionStore = {
     'gift'         : {
         text : 'gift',
         title: 'Regalo',
-        image: 'gift.jpg'
+        image: 'gift-boxes.jpg'
     },
     'contact'      : {
         text : 'contact',
