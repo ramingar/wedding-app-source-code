@@ -12,6 +12,7 @@
 
         <div class="absolute flex bottom-0 justify-center w-100 w3-ns h-100-ns flex-column-ns">
             <button v-bind:disabled="!this.previous()"
+                    @click="goBack"
                     :class="previousClasses"
                     class="b--dotted b--black w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db previous"></span>
@@ -61,7 +62,7 @@
 
         methods: {
             ...mapGetters(['submenu', 'next', 'previous']),
-            ...mapActions(['hideSubmenu', 'showSubmenu', 'setCurrentSection']),
+            ...mapActions(['hideSubmenu', 'showSubmenu', 'setCurrentSection', 'goToPreviousPage']),
             hideMenu       : function () {
                 this.hideSubmenu()
             },
@@ -70,6 +71,9 @@
             },
             changeSectionTo: function (section) {
                 this.setCurrentSection({section});
+            },
+            goBack         : function () {
+                this.goToPreviousPage();
             }
         },
 

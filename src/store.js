@@ -12,6 +12,7 @@ export default new Vuex.Store({
         previous      : false,
         sections      : sections,
         currentSection: 'default',
+        historic      : [],
         cardText      : sections.default.text,
         cardTitle     : sections.default.title,
         cardImage     : sections.default.image
@@ -43,10 +44,18 @@ export default new Vuex.Store({
         },
 
         setCurrentSection: (state, section) => {
-            state.cardText  = sections[section].text;
-            state.cardTitle = sections[section].title;
-            state.cardImage = sections[section].image;
+            state.cardText       = sections[section].text;
+            state.cardTitle      = sections[section].title;
+            state.cardImage      = sections[section].image;
             state.currentSection = section;
+        },
+
+        pushInHistoric: (state, section) => {
+            state.historic = Array.prototype.concat.call([], state.historic, section)
+        },
+
+        popFromHistoric: (state) => {
+            state.historic = state.historic.filter((val, index, arr) => index < arr.length - 1 ? val : undefined)
         }
     },
 
@@ -75,8 +84,17 @@ export default new Vuex.Store({
             commit('disablePrevious')
         },
 
-        setCurrentSection: ({commit}, {section}) => {
-            commit('setCurrentSection', section)
+        setCurrentSection: ({commit, dispatch, state}, {section}) => {
+            commit('setCurrentSection', section);
+            commit('pushInHistoric', section);
+            dispatch('enablePrevious');
+        },
+
+        goToPreviousPage: ({commit, dispatch, state}) => {
+            commit('popFromHistoric');  // caution! not immutable
+            const section = state.historic.length > 0 ? state.historic[state.historic.length - 1] : 'default';
+            commit('setCurrentSection', section);
+            'default' === section ? dispatch('disablePrevious') : undefined;
         }
     },
 
@@ -87,6 +105,7 @@ export default new Vuex.Store({
         cardText      : (state) => state.cardText,
         cardTitle     : (state) => state.cardTitle,
         cardImage     : (state) => state.cardImage,
-        currentSection: (state) => state.currentSection
+        currentSection: (state) => state.currentSection,
+        historic      : (state) => state.historic
     }
 })
