@@ -29,19 +29,24 @@
 
         <div :class="submenuClasses"
              class="transition-fast absolute bottom-0 justify-center flex-column-ns w-100 w3-ns h-100-ns _bottom-2_87 _bottom-inherit-ns _left-2_87-ns">
-            <button class="b--dotted b--black w3 pa2 f2 tc cardboard-button-background button">
+            <button @click="changeSectionTo('location'); hideMenu();"
+                    class="b--dotted b--black w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db location"></span>
             </button>
-            <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
+            <button @click="changeSectionTo('parkings'); hideMenu()"
+                    class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db parking"></span>
             </button>
-            <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
+            <button @click="changeSectionTo('save-the-date'); hideMenu()"
+                    class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db calendar"></span>
             </button>
-            <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
+            <button @click="changeSectionTo('gift'); hideMenu()"
+                    class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db present"></span>
             </button>
-            <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
+            <button @click="changeSectionTo('contact'); hideMenu()"
+                    class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db contact"></span>
             </button>
         </div>
@@ -56,12 +61,15 @@
 
         methods: {
             ...mapGetters(['submenu', 'next', 'previous']),
-            ...mapActions(['hideSubmenu', 'showSubmenu']),
-            hideMenu  : function () {
+            ...mapActions(['hideSubmenu', 'showSubmenu', 'setCurrentSection']),
+            hideMenu       : function () {
                 this.hideSubmenu()
             },
-            toggleMenu: function () {
+            toggleMenu     : function () {
                 this.submenu() ? this.hideSubmenu() : this.showSubmenu()
+            },
+            changeSectionTo: function (section) {
+                this.setCurrentSection({section});
             }
         },
 
