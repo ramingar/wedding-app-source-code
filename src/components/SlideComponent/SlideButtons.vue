@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="fixed top-0 right-0 f2 w2 h2 ma1 button">
+        <div :class="menuClasses"
+             class="fixed top-0 right-0 f2 w2 h2 ma1 button">
             <span class="db info"></span>
         </div>
 
@@ -10,7 +11,8 @@
              class="transition-fast absolute absolute--fill _h0 _w0 o-0" style="background-color: rgb(31, 57, 37);">
         </div>
 
-        <div class="absolute flex bottom-0 justify-center w-100 w3-ns h-100-ns flex-column-ns">
+        <div :class="menuClasses"
+             class="absolute bottom-0 justify-center w-100 w3-ns h-100-ns flex-column-ns">
             <button v-bind:disabled="!this.previous()"
                     @click="goBack"
                     :class="previousClasses"
@@ -61,7 +63,7 @@
         name: "SlideButtons",
 
         methods: {
-            ...mapGetters(['submenu', 'next', 'previous']),
+            ...mapGetters(['menu', 'submenu', 'next', 'previous']),
             ...mapActions(['hideSubmenu', 'showSubmenu', 'setCurrentSection', 'goToPreviousPage']),
             hideMenu       : function () {
                 this.hideSubmenu()
@@ -81,6 +83,12 @@
             curtainClasses() {
                 return {
                     displayed: this.submenu()
+                }
+            },
+            menuClasses() {
+                return {
+                    flex: this.menu(),
+                    dn  : !this.menu()
                 }
             },
             submenuClasses() {
