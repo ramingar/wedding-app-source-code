@@ -9,27 +9,18 @@
             _h-65-mobile-landscape _w-50-mobile-landscape
             _h-60-hd _w-50-hd
             _h-60-fullhd _w-50-fullhd">
-                <slide-card-main/>
             </div>
             <div class="pa3 ph4 f7
             _w-50-mobile-landscape f8-mobile-landscape _pr4-mobile-landscape
             _w-50-hd _pr4_50-hd _f5-hd
             _w-50-fullhd _pr4_50-fullhd _f4-fullhd">
-                <slide-card-content/>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import SlideCardMain from './SlideCardMain.vue'
-    import SlideCardContent from './SlideCardContent.vue'
-
     export default {
-        name      : "SlideCard",
-        components: {
-            SlideCardMain,
-            SlideCardContent
-        }
+        name: "SlideCardBlank",
     }
 </script>

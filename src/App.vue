@@ -20,12 +20,21 @@
         src: url(./assets/fonts/tofino-personal/TofinoPersonal-Book.ttf);
     }
 
+    @font-face {
+        font-family: Phones;
+        src: url(./assets/fonts/phones/PHONES.TTF);
+    }
+
     .kbreindeergames {
         font-family: 'KBREINDEERGAMES';
     }
 
     .tofino-icon {
         font-family: 'PWSmallIcons';
+    }
+
+    .phone-icon {
+        font-family: 'Phones';
     }
 
     #app {

@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="fixed top-0 right-0 f2 w2 h2 ma1 button">
+        <div :class="menuClasses"
+             class="fixed top-0 right-0 f2 w2 h2 ma1 button">
             <span class="db info"></span>
         </div>
 
@@ -10,8 +11,10 @@
              class="transition-fast absolute absolute--fill _h0 _w0 o-0" style="background-color: rgb(31, 57, 37);">
         </div>
 
-        <div class="absolute flex bottom-0 justify-center w-100 w3-ns h-100-ns flex-column-ns">
+        <div :class="menuClasses"
+             class="absolute bottom-0 justify-center w-100 w3-ns h-100-ns flex-column-ns">
             <button v-bind:disabled="!this.previous()"
+                    @click="goBack"
                     :class="previousClasses"
                     class="b--dotted b--black w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db previous"></span>
@@ -29,19 +32,24 @@
 
         <div :class="submenuClasses"
              class="transition-fast absolute bottom-0 justify-center flex-column-ns w-100 w3-ns h-100-ns _bottom-2_87 _bottom-inherit-ns _left-2_87-ns">
-            <button class="b--dotted b--black w3 pa2 f2 tc cardboard-button-background button">
+            <button @click="changeSectionTo('location'); hideMenu();"
+                    class="b--dotted b--black w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db location"></span>
             </button>
-            <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
+            <button @click="changeSectionTo('parkings'); hideMenu()"
+                    class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db parking"></span>
             </button>
-            <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
+            <button @click="changeSectionTo('save-the-date'); hideMenu()"
+                    class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db calendar"></span>
             </button>
-            <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
+            <button @click="changeSectionTo('gift'); hideMenu()"
+                    class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db present"></span>
             </button>
-            <button class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
+            <button @click="changeSectionTo('contact'); hideMenu()"
+                    class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db contact"></span>
             </button>
         </div>
@@ -55,13 +63,19 @@
         name: "SlideButtons",
 
         methods: {
-            ...mapGetters(['submenu', 'next', 'previous']),
-            ...mapActions(['hideSubmenu', 'showSubmenu']),
-            hideMenu  : function () {
+            ...mapGetters(['menu', 'submenu', 'next', 'previous']),
+            ...mapActions(['hideSubmenu', 'showSubmenu', 'setCurrentSection', 'goToPreviousPage']),
+            hideMenu       : function () {
                 this.hideSubmenu()
             },
-            toggleMenu: function () {
+            toggleMenu     : function () {
                 this.submenu() ? this.hideSubmenu() : this.showSubmenu()
+            },
+            changeSectionTo: function (section) {
+                this.setCurrentSection({section});
+            },
+            goBack         : function () {
+                this.goToPreviousPage();
             }
         },
 
@@ -69,6 +83,12 @@
             curtainClasses() {
                 return {
                     displayed: this.submenu()
+                }
+            },
+            menuClasses() {
+                return {
+                    flex: this.menu(),
+                    dn  : !this.menu()
                 }
             },
             submenuClasses() {
@@ -96,6 +116,10 @@
     /* used by Vue in a computed variable */
     .button.button-disabled:hover {
         cursor: default;
+    }
+
+    .button {
+        color: black;
     }
 
     .button-disabled span {
