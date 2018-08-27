@@ -57,15 +57,14 @@
                 .then(user => {
                     const userData = user.data ? user.data : {};
                     this.setUserData({userData});
-                    return axios
-                        .get(`/static-pages/${userData.staticPages}.json`)
-                        .then(staticPages => {
-                            this.setSections({sections: staticPages.data});
-                            this.setCurrentSection({section: 'default', addToHistoric: false});
-                            if (staticPages.data) {
-                                this.showMenu();
-                            }
-                        })
+                    return axios.get(`/static-pages/${userData.staticPages}.json`)
+                })
+                .then(staticPages => {
+                    this.setSections({sections: staticPages.data});
+                    this.setCurrentSection({section: 'default', addToHistoric: false});
+                    if (staticPages.data) {
+                        this.showMenu();
+                    }
                 })
                 .catch(() => {
                     this.setCurrentSection({section: 'default'})
