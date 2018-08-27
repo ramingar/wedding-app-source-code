@@ -4,10 +4,13 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 
-Vue.config.productionTip = false
+import axios from 'axios'
+
+axios.defaults.baseURL   = 'https://enlace-alicia-rafa.firebaseio.com';
+Vue.config.productionTip = false;
 
 new Vue({
     router,
     store,
     render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');

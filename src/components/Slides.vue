@@ -12,7 +12,8 @@
     import SlideCard from './SlideComponent/SlideCard.vue'
     import SlideCardBlank from './SlideComponent/SlideCardBlank.vue'
 
-    import {mapGetters} from 'vuex'
+    import {mapGetters, mapActions} from 'vuex'
+    import axios from 'axios'
 
     export default {
         name      : 'Slides',
@@ -36,7 +37,8 @@
         },
 
         methods: {
-            ...mapGetters(['currentSection'])
+            ...mapGetters(['currentSection']),
+            ...mapActions(['setUserData', 'setCurrentSection', 'setSections', 'showMenu'])
         },
 
         watch: {
@@ -46,6 +48,28 @@
                     this.cardTransition = false;
                 }, 500);
             }
+        },
+
+        created() {
+            const id = this.$router.history.current.params.id;
+            axios
+                .get(`/users/${id}.json`)
+                .then(user => {
+                    const userData = user.data ? user.data : {};
+                    this.setUserData({userData});
+                    return axios
+                        .get(`/static-pages/${userData.staticPages}.json`)
+                        .then(staticPages => {
+                            this.setSections({sections: staticPages.data});
+                            this.setCurrentSection({section: 'default', addToHistoric: false});
+                            if (staticPages.data) {
+                                this.showMenu();
+                            }
+                        })
+                })
+                .catch(() => {
+                    this.setCurrentSection({section: 'default'})
+                })
         }
     }
 </script>

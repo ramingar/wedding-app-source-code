@@ -1,25 +1,30 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import sections from './sectionStore'
+import sectionsStore from './sectionStore'
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
+        userData      : {},
         menu          : false,
         submenu       : false,
         next          : false,
         previous      : false,
-        sections      : sections,
-        currentSection: 'default',
+        sections      : sectionsStore,
+        currentSection: 'loading',
         historic      : [],
-        cardText      : sections.default.text,
-        cardTitle     : sections.default.title,
-        cardImage     : sections.default.image
+        cardText      : sectionsStore.loading.text,
+        cardTitle     : sectionsStore.loading.title,
+        cardImage     : sectionsStore.loading.image
     },
 
     mutations: {
+
+        setUserData: (state, userData) => {
+            state.userData = userData
+        },
 
         showMenu: (state) => {
             state.menu = true
@@ -50,14 +55,18 @@ export default new Vuex.Store({
         },
 
         setCurrentSection: (state, section) => {
-            state.cardText       = sections[section].text;
-            state.cardTitle      = sections[section].title;
-            state.cardImage      = sections[section].image;
+            state.cardText       = state.sections[section].text;
+            state.cardTitle      = state.sections[section].title;
+            state.cardImage      = state.sections[section].image;
             state.currentSection = section;
         },
 
+        setSections: (state, sections = {}) => {
+            state.sections = Object.assign({}, state.sections, sections);
+        },
+
         pushInHistoric: (state, section) => {
-            state.historic = Array.prototype.concat.call([], state.historic, section)
+            state.historic = Array.prototype.concat.call([], state.historic, section);
         },
 
         popFromHistoric: (state) => {
@@ -66,6 +75,10 @@ export default new Vuex.Store({
     },
 
     actions: {
+        setUserData: ({commit}, {userData}) => {
+            commit('setUserData', userData)
+        },
+
         showMenu: ({commit}) => {
             commit('showMenu')
         },
@@ -94,10 +107,16 @@ export default new Vuex.Store({
             commit('disablePrevious')
         },
 
-        setCurrentSection: ({commit, dispatch, state}, {section}) => {
+        setCurrentSection: ({commit, dispatch, state}, {section, addToHistoric = true}) => {
             commit('setCurrentSection', section);
-            commit('pushInHistoric', section);
-            dispatch('enablePrevious');
+            if (addToHistoric) {
+                commit('pushInHistoric', section);
+                dispatch('enablePrevious');
+            }
+        },
+
+        setSections: ({commit}, {sections}) => {
+            commit('setSections', sections)
         },
 
         goToPreviousPage: ({commit, dispatch, state}) => {
@@ -109,6 +128,7 @@ export default new Vuex.Store({
     },
 
     getters: {
+        userData      : (state) => state.userData,
         menu          : (state) => state.menu,
         submenu       : (state) => state.submenu,
         next          : (state) => state.next,
