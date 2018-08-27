@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        menu          : true,
+        menu          : false,
         submenu       : false,
         next          : false,
         previous      : false,
@@ -21,8 +21,8 @@ export default new Vuex.Store({
 
     mutations: {
 
-        hideMenu: (state) => {
-            state.menu = false
+        showMenu: (state) => {
+            state.menu = true
         },
 
         showSubmenu: (state) => {
@@ -66,8 +66,8 @@ export default new Vuex.Store({
     },
 
     actions: {
-        hideMenu: ({commit}) => {
-            commit('hideMenu')
+        showMenu: ({commit}) => {
+            commit('showMenu')
         },
 
         showSubmenu: ({commit}) => {
