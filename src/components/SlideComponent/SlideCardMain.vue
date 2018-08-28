@@ -2,8 +2,9 @@
     <div class="h-100 w-100">
         <!--<div class="center background-image h-100 w-100 bg-center cover br--top br4"></div>-->
         <div :style="image"
+             v-if="!question"
              class="bg-center contain _rotate-355 h-100 w-100"></div>
-        <div class="f7"></div>
+        <div class="flex items-center justify-center h-100 w-100">{{question}}</div>
         <div class="dn">{{computedSection}}</div>
     </div>
 </template>
@@ -15,14 +16,15 @@
         name: "SlideCardMain",
 
         methods: {
-            ...mapGetters(['cardImage', 'currentSection']),
+            ...mapGetters(['cardImage', 'cardQuestion', 'currentSection', 'contentDelay']),
         },
 
         data() {
             return {
-                section: '',
-                image  : '',
-                baseUrl: '/img/cards'
+                section : '',
+                image   : '',
+                question: '',
+                baseUrl : '/img/cards'
             }
         },
 
@@ -39,8 +41,9 @@
         watch: {
             section: function () {
                 setTimeout(() => {
-                    this.image = {'background-image': `url(${this.baseUrl}/${this.cardImage()})`}
-                }, 400);
+                    this.image    = {'background-image': `url(${this.baseUrl}/${this.cardImage()})`};
+                    this.question = this.cardQuestion();
+                }, this.contentDelay());
             }
         }
     }

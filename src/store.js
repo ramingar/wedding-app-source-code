@@ -8,6 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         userData      : {},
+        userId        : '',
         menu          : false,
         submenu       : false,
         next          : false,
@@ -17,13 +18,21 @@ export default new Vuex.Store({
         historic      : [],
         cardText      : sectionsStore.loading.text,
         cardTitle     : sectionsStore.loading.title,
-        cardImage     : sectionsStore.loading.image
+        cardImage     : sectionsStore.loading.image,
+        cardAnswerType: sectionsStore.loading.answerType,
+        cardChoices   : sectionsStore.loading.choices,
+        cardQuestion  : sectionsStore.loading.question,
+        contentDelay  : 400
     },
 
     mutations: {
 
         setUserData: (state, userData) => {
             state.userData = userData
+        },
+
+        setUserId: (state, userId) => {
+            state.userId = userId
         },
 
         showMenu: (state) => {
@@ -55,9 +64,14 @@ export default new Vuex.Store({
         },
 
         setCurrentSection: (state, section) => {
-            state.cardText       = state.sections[section].text;
-            state.cardTitle      = state.sections[section].title;
-            state.cardImage      = state.sections[section].image;
+            state.cardText  = state.sections[section].text;
+            state.cardTitle = state.sections[section].title;
+            state.cardImage = state.sections[section].image;
+
+            state.cardAnswerType = state.sections[section].answerType;
+            state.cardChoices    = state.sections[section].choices;
+            state.cardQuestion   = state.sections[section].question;
+
             state.currentSection = section;
         },
 
@@ -77,6 +91,10 @@ export default new Vuex.Store({
     actions: {
         setUserData: ({commit}, {userData}) => {
             commit('setUserData', userData)
+        },
+
+        setUserId: ({commit}, {userId}) => {
+            commit('setUserId', userId)
         },
 
         showMenu: ({commit}) => {
@@ -129,6 +147,7 @@ export default new Vuex.Store({
 
     getters: {
         userData      : (state) => state.userData,
+        userId        : (state) => state.userId,
         menu          : (state) => state.menu,
         submenu       : (state) => state.submenu,
         next          : (state) => state.next,
@@ -136,7 +155,11 @@ export default new Vuex.Store({
         cardText      : (state) => state.cardText,
         cardTitle     : (state) => state.cardTitle,
         cardImage     : (state) => state.cardImage,
+        cardAnswerType: (state) => state.cardAnswerType,
+        cardChoices   : (state) => state.cardChoices,
+        cardQuestion  : (state) => state.cardQuestion,
         currentSection: (state) => state.currentSection,
-        historic      : (state) => state.historic
+        historic      : (state) => state.historic,
+        contentDelay  : (state) => state.contentDelay
     }
 })
