@@ -4,9 +4,15 @@
         <template v-if="!loadAnswersComponent">
             <span class="kbreindeergames db mb3 f4 _f2-hd _f2-fullhd tc">{{ title }}</span>
             <span v-html="text"></span>
-            <button @click="changeSectionTo('question-0')"
-                    :class="startButtonClasses">Empezar con las preguntas
-            </button>
+            <br>
+            <div class="db tc">
+                <a @click="changeSectionTo('question-0')"
+                   :class="startButtonClasses"
+                   class="relative link dim br-pill ba ph3 pv2 mb2 dark-green pointer mt3">Empezar con las preguntas
+                    </a>
+                </a>
+
+            </div>
         </template>
 
         <!-- QUESTION CARDS ---------------------------------------------------- -->
