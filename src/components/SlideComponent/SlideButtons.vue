@@ -117,24 +117,6 @@
 
 <style scoped>
 
-    /* used by Vue in a computed variable */
-    .button.button-disabled:hover {
-        cursor: default;
-    }
-
-    .button {
-        color: black;
-    }
-
-    .button-disabled span {
-        border-color: black;
-        color: rgba(129, 100, 59, .4);
-        -webkit-animation-name: none;
-        -moz-animation-name: none;
-        -o-animation-name: none;
-        animation-name: none;
-    }
-
     .transition-fast {
         -webkit-transition: opacity .2s;
         -moz-transition: opacity .2s;
@@ -151,51 +133,6 @@
 
     .cardboard-button-background {
         background-image: url(../../assets/imgs/slide-component/cardboard-buttons-background.jpg);
-    }
-
-    .button:hover {
-        cursor: pointer;
-        color: rgba(27, 75, 36, 1);
-        border-color: black;
-    }
-
-    .button:active span {
-        color: rgba(23, 134, 44, 1);
-    }
-
-    .button.button-disabled:active span {
-        color: rgba(129, 100, 59, .4);
-    }
-
-    @keyframes hovered {
-        0% {
-            -webkit-transform: rotate(0) scale(1.4);
-            -moz-transform: rotate(0) scale(1.4);
-            -ms-transform: rotate(0) scale(1.4);
-            -o-transform: rotate(0) scale(1.4);
-            transform: rotate(0) scale(1.4);
-        }
-        33% {
-            -webkit-transform: rotate(-5deg) scale(1.4);
-            -moz-transform: rotate(-5deg) scale(1.4);
-            -ms-transform: rotate(-5deg) scale(1.4);
-            -o-transform: rotate(-5deg) scale(1.4);
-            transform: rotate(-5deg) scale(1.4);
-        }
-        66% {
-            -webkit-transform: rotate(5deg) scale(1.4);
-            -moz-transform: rotate(5deg) scale(1.4);
-            -ms-transform: rotate(5deg) scale(1.4);
-            -o-transform: rotate(5deg) scale(1.4);
-            transform: rotate(5deg) scale(1.4);
-        }
-        100% {
-            -webkit-transform: rotate(0) scale(1.4);
-            -moz-transform: rotate(0) scale(1.4);
-            -ms-transform: rotate(0) scale(1.4);
-            -o-transform: rotate(0) scale(1.4);
-            transform: rotate(0) scale(1.4);
-        }
     }
 
     .info {
@@ -273,74 +210,6 @@
     @media (max-width: 30em) {
         ._bl-0-s {
             border-left: 0;
-        }
-    }
-
-    @media (min-width: 75rem) and (max-width: 86rem) and (min-height: 600px) {
-        .button:hover span {
-            -webkit-animation-name: hovered;
-            -moz-animation-name: hovered;
-            -o-animation-name: hovered;
-            animation-name: hovered;
-
-            -webkit-animation-duration: .2s;
-            -moz-animation-duration: .2s;
-            -o-animation-duration: .2s;
-            animation-duration: .2s;
-            animation-iteration-count: 4;
-
-            -webkit-transform: rotate(0) scale(1.4);
-            -moz-transform: rotate(0) scale(1.4);
-            -ms-transform: rotate(0) scale(1.4);
-            -o-transform: rotate(0) scale(1.4);
-            transform: rotate(0) scale(1.4);
-        }
-
-        .button.button-disabled:hover span {
-            -webkit-animation-name: none;
-            -moz-animation-name: none;
-            -o-animation-name: none;
-            animation-name: none;
-
-            -webkit-transform: none;
-            -moz-transform: none;
-            -ms-transform: none;
-            -o-transform: none;
-            transform: none;
-        }
-    }
-
-    @media (min-width: 86rem) and (min-height: 600px) {
-        .button:hover span {
-            -webkit-animation-name: hovered;
-            -moz-animation-name: hovered;
-            -o-animation-name: hovered;
-            animation-name: hovered;
-
-            -webkit-animation-duration: .2s;
-            -moz-animation-duration: .2s;
-            -o-animation-duration: .2s;
-            animation-duration: .2s;
-            animation-iteration-count: 4;
-
-            -webkit-transform: rotate(0) scale(1.4);
-            -moz-transform: rotate(0) scale(1.4);
-            -ms-transform: rotate(0) scale(1.4);
-            -o-transform: rotate(0) scale(1.4);
-            transform: rotate(0) scale(1.4);
-        }
-
-        .button.button-disabled:hover span {
-            -webkit-animation-name: none;
-            -moz-animation-name: none;
-            -o-animation-name: none;
-            animation-name: none;
-
-            -webkit-transform: none;
-            -moz-transform: none;
-            -ms-transform: none;
-            -o-transform: none;
-            transform: none;
         }
     }
 
