@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div :class="{'h-100': 'textarea' === choiceType}">
         <div v-if="'radio' === choiceType" v-for="choice in choices" :key="choice.id">
-            <label class="flex items-start w-100 pa2 pv3-ns">
+            <label class="flex items-start w-100 pv2">
                 <img src="../../assets/imgs/radio-unchecked.png"
                      :class="{dn: (choice.id + '||' + choice.choice) === answerRadio}"
                      class="mt1 w1 h1"/>
@@ -17,7 +17,7 @@
         </div>
 
         <div v-if="'checkbox' === choiceType" v-for="choice in choices" :key="choice.id">
-            <label class="flex items-start w-100 pa2 pv3-ns">
+            <label class="flex items-start w-100 pv2 ">
                 <img src="../../assets/imgs/check-unchecked.png"
                      :class="{dn: answerCheckbox.indexOf(choice.id + '||' + choice.choice) > -1}"
                      class="mt1 w1 h1"/>
@@ -32,10 +32,11 @@
             </label>
         </div>
 
-        <div v-if="'textarea' === choiceType">
-            <label class="flex flex-wrap w-100">
+        <div v-if="'textarea' === choiceType" class="h-100">
+            <label class="flex flex-wrap w-100 h-100
+                _h-100-mobile-landscape">
                 <textarea v-model="answerTextarea"
-                          class="b--dashed _b--green w5 h4 h5-ns _h5-tablet-portrait"
+                          class="b--dashed _b--green w-100 h-100"
                           placeholder="Escribe aquí la respuesta..."></textarea>
             </label>
         </div>

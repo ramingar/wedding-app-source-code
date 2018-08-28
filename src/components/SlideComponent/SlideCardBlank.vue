@@ -11,7 +11,7 @@
             _h-60-fullhd _w-50-fullhd">
             </div>
             <div class="pa3 ph4 f7
-            _w-50-mobile-landscape f8-mobile-landscape _pr4-mobile-landscape
+            _w-50-mobile-landscape _f8-mobile-landscape _pr4-mobile-landscape
             _w-50-hd _pr4_50-hd _f5-hd
             _w-50-fullhd _pr4_50-fullhd _f4-fullhd">
             </div>
