@@ -29,9 +29,7 @@
         },
 
         computed: {
-            computedSection() {
-                this.section = this.currentSection()
-            }
+            ...mapGetters({computedSection: 'currentSection'})
         },
 
         created: function () {
@@ -39,7 +37,7 @@
         },
 
         watch: {
-            section: function () {
+            computedSection: function () {
                 setTimeout(() => {
                     this.image    = {'background-image': `url(${this.baseUrl}/${this.cardImage()})`};
                     this.question = this.cardQuestion();
