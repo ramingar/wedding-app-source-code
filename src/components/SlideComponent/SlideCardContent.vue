@@ -10,14 +10,21 @@
         <!-- QUESTION CARDS ---------------------------------------------------- -->
         <component v-bind:is="loadAnswersComponent"/>
 
-        <div class="dn">{{computedSection}}</div>
     </div>
 </template>
 
 <script>
     import {mapGetters, mapActions} from 'vuex'
-
     import SlideCardContentAnswer from './SlideCardContentAnswer'
+
+    const updateCard = (self) => {
+        self.loaded = false;
+        setTimeout(() => {
+            self.title  = self.cardTitle();
+            self.text   = self.cardText();
+            self.loaded = true;
+        }, self.contentDelay());
+    };
 
     export default {
         name: "SlideCardContent",
@@ -36,17 +43,14 @@
 
         data() {
             return {
-                title  : '',
-                text   : '',
-                loaded : false,
-                section: ''
+                title : '',
+                text  : '',
+                loaded: false,
             }
         },
 
         computed: {
-            computedSection() {
-                this.section = this.currentSection()
-            },
+            ...mapGetters({computedSection: 'currentSection'}),
             startButtonClasses() {
                 return {
                     dn: !(this.loaded && 'default' === this.currentSection() && this.userData().user)
@@ -60,19 +64,15 @@
         },
 
         created() {
-            this.title   = this.cardTitle();
-            this.text    = this.cardText();
-            this.section = this.currentSection();
+            this.title = this.cardTitle();
+            this.text  = this.cardText();
+
+            updateCard(this);
         },
 
         watch: {
-            section() {
-                this.loaded = false;
-                setTimeout(() => {
-                    this.title  = this.cardTitle();
-                    this.text   = this.cardText();
-                    this.loaded = true;
-                }, this.contentDelay());
+            computedSection() {
+                updateCard(this)
             }
         }
     }
