@@ -1,6 +1,6 @@
 <template>
     <div>
-        <template v-if="areChoicesRadio" v-for="choice in choices">
+        <template v-if="'radio' === choiceType" v-for="choice in choices">
             <label class="flex flex-wrap w-100 pa2 pv3-ns">
                 <input type="radio"
                        :value="choice.id + '||' + choice.choice"
@@ -9,7 +9,7 @@
             </label>
         </template>
 
-        <template v-if="areChoicesCheckbox" v-for="choice in choices">
+        <template v-if="'checkbox' === choiceType" v-for="choice in choices">
             <label class="flex flex-wrap w-100 pa2 pv3-ns">
                 <input type="checkbox"
                        :value="choice.id + '||' + choice.choice"
@@ -17,6 +17,13 @@
                 <span class="ml2">{{choice.choice}}</span>
             </label>
         </template>
+
+        <template v-if="'textarea' === choiceType">
+            <label class="flex flex-wrap w-100 pa2 pv3-ns">
+                <textarea v-model="answerTextarea" placeholder="Escribe aquí..."></textarea>
+            </label>
+        </template>
+
         <div class="dn">{{computedSection}}</div>
     </div>
 </template>
@@ -35,20 +42,16 @@
             return {
                 answerRadio   : '',
                 answerCheckbox: [],
+                answerTextarea: [],
                 choices       : [],
-                section       : ''
+                section       : '',
+                choiceType    : ''
             }
         },
 
         computed: {
             computedSection() {
                 this.section = this.currentSection();
-            },
-            areChoicesRadio() {
-                return 'radio' === this.cardAnswerType()
-            },
-            areChoicesCheckbox() {
-                return 'checkbox' === this.cardAnswerType()
             }
         },
 
@@ -59,9 +62,13 @@
             answerCheckbox(newValue, oldValue) {
                 console.log(newValue);
             },
+            answerTextarea(newValue, oldValue) {
+                console.log(newValue);
+            },
             section(newValue) {
                 setTimeout(() => {
                     this.choices     = this.cardChoices();
+                    this.choiceType  = this.cardAnswerType();
                     const answerType = this.cardAnswerType();
 
                     const ucFirst = text =>
@@ -71,7 +78,8 @@
 
                     const NOTHING_ANSWERS = {
                         'radio'   : '',
-                        'checkbox': []
+                        'checkbox': [],
+                        'textarea': ''
                     };
 
                     const NOTHING       = NOTHING_ANSWERS[answerType];
