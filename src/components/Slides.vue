@@ -37,8 +37,8 @@
         },
 
         methods: {
-            ...mapGetters(['currentSection']),
-            ...mapActions(['setUserData', 'setCurrentSection', 'setSections', 'showMenu'])
+            ...mapGetters(['currentSection', 'userData']),
+            ...mapActions(['setUserData', 'setUserId', 'setCurrentSection', 'setSections', 'showMenu'])
         },
 
         watch: {
@@ -51,21 +51,31 @@
         },
 
         created() {
-            const id = this.$router.history.current.params.id;
+            const userId = this.$router.history.current.params.id;
             axios
-                .get(`/users/${id}.json`)
+                .get(`/users/${userId}.json`)
                 .then(user => {
                     const userData = user.data ? user.data : {};
                     this.setUserData({userData});
-                    return axios
-                        .get(`/static-pages/${userData.staticPages}.json`)
-                        .then(staticPages => {
-                            this.setSections({sections: staticPages.data});
-                            this.setCurrentSection({section: 'default', addToHistoric: false});
-                            if (staticPages.data) {
-                                this.showMenu();
-                            }
-                        })
+                    this.setUserId({userId});
+                    return axios.get(`/static-pages/${userData.staticPages}.json`)
+                })
+                .then(staticPages => {
+                    this.setSections({sections: staticPages.data});
+                    this.setCurrentSection({section: 'default', addToHistoric: false});
+                    if (staticPages.data) {
+                        this.showMenu();
+                    }
+                })
+                .then(() => {
+                    const questionsPromises = this.userData().questions.map(val => axios.get(`/questions/${val}.json`));
+                    return Promise.all(questionsPromises)
+                })
+                .then(res => {
+                    const questions = Object
+                        .keys(res)
+                        .reduce((acc, key, index) => Object.assign({}, acc, {[`question-${index}`]: res[key].data}), {});
+                    this.setSections({sections: questions});  // merging questions to the user's static-pages
                 })
                 .catch(() => {
                     this.setCurrentSection({section: 'default'})

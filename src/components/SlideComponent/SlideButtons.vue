@@ -23,7 +23,8 @@
                     class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db menu"></span>
             </button>
-            <button v-bind:disabled="!this.previous()"
+            <button v-bind:disabled="!this.next()"
+                    @click="goNext"
                     :class="nextClasses"
                     class="b--dotted b--black bt-0-ns _bl-0-s w3 pa2 f2 tc cardboard-button-background button">
                 <span class="db next"></span>
@@ -63,19 +64,22 @@
         name: "SlideButtons",
 
         methods: {
-            ...mapGetters(['menu', 'submenu', 'next', 'previous']),
-            ...mapActions(['hideSubmenu', 'showSubmenu', 'setCurrentSection', 'goToPreviousPage']),
-            hideMenu       : function () {
+            ...mapGetters(['menu', 'submenu', 'next', 'previous', 'currentSection']),
+            ...mapActions(['hideSubmenu', 'showSubmenu', 'setCurrentSection', 'goToPreviousPage', 'goToNextQuestion']),
+            hideMenu() {
                 this.hideSubmenu()
             },
-            toggleMenu     : function () {
+            toggleMenu() {
                 this.submenu() ? this.hideSubmenu() : this.showSubmenu()
             },
-            changeSectionTo: function (section) {
-                this.setCurrentSection({section});
+            changeSectionTo(section) {
+                this.setCurrentSection({section})
             },
-            goBack         : function () {
-                this.goToPreviousPage();
+            goBack() {
+                this.goToPreviousPage()
+            },
+            goNext() {
+                this.goToNextQuestion()
             }
         },
 

@@ -5,9 +5,28 @@ import sectionsStore from './sectionStore'
 
 Vue.use(Vuex);
 
+const getSection = (state) => {
+    return state.historic.length > 0 ? state.historic[state.historic.length - 1] : 'default'
+};
+
+const getCurrentQuestionIndex = (state) => {
+    return state.currentSection.split('-')[1];
+};
+
+const areMoreQuestions = (state) => {
+    const currentIndex = getCurrentQuestionIndex(state);
+    const questions    = state.userData.questions;
+    return currentIndex < (questions.length - 1);
+};
+
+const canNextButtonBeEnabled = (state) => {
+    return state.currentSection.indexOf('question') > -1 && areMoreQuestions(state)
+};
+
 export default new Vuex.Store({
     state: {
         userData      : {},
+        userId        : '',
         menu          : false,
         submenu       : false,
         next          : false,
@@ -17,13 +36,21 @@ export default new Vuex.Store({
         historic      : [],
         cardText      : sectionsStore.loading.text,
         cardTitle     : sectionsStore.loading.title,
-        cardImage     : sectionsStore.loading.image
+        cardImage     : sectionsStore.loading.image,
+        cardAnswerType: sectionsStore.loading.answerType,
+        cardChoices   : sectionsStore.loading.choices,
+        cardQuestion  : sectionsStore.loading.question,
+        contentDelay  : 400
     },
 
     mutations: {
 
         setUserData: (state, userData) => {
             state.userData = userData
+        },
+
+        setUserId: (state, userId) => {
+            state.userId = userId
         },
 
         showMenu: (state) => {
@@ -55,9 +82,14 @@ export default new Vuex.Store({
         },
 
         setCurrentSection: (state, section) => {
-            state.cardText       = state.sections[section].text;
-            state.cardTitle      = state.sections[section].title;
-            state.cardImage      = state.sections[section].image;
+            state.cardText  = state.sections[section].text;
+            state.cardTitle = state.sections[section].title;
+            state.cardImage = state.sections[section].image;
+
+            state.cardAnswerType = state.sections[section].answerType;
+            state.cardChoices    = state.sections[section].choices;
+            state.cardQuestion   = state.sections[section].question;
+
             state.currentSection = section;
         },
 
@@ -77,6 +109,10 @@ export default new Vuex.Store({
     actions: {
         setUserData: ({commit}, {userData}) => {
             commit('setUserData', userData)
+        },
+
+        setUserId: ({commit}, {userId}) => {
+            commit('setUserId', userId)
         },
 
         showMenu: ({commit}) => {
@@ -113,6 +149,11 @@ export default new Vuex.Store({
                 commit('pushInHistoric', section);
                 dispatch('enablePrevious');
             }
+
+            dispatch('disableNext');
+            if (canNextButtonBeEnabled(state)) {
+                dispatch('enableNext')
+            }
         },
 
         setSections: ({commit}, {sections}) => {
@@ -121,14 +162,28 @@ export default new Vuex.Store({
 
         goToPreviousPage: ({commit, dispatch, state}) => {
             commit('popFromHistoric');  // caution! not immutable
-            const section = state.historic.length > 0 ? state.historic[state.historic.length - 1] : 'default';
+            const section = getSection(state);
             commit('setCurrentSection', section);
-            'default' === section ? dispatch('disablePrevious') : undefined;
+
+            if ('default' === section) {
+                dispatch('disablePrevious')
+            }
+
+            dispatch('disableNext');
+            if (canNextButtonBeEnabled(state)) {
+                dispatch('enableNext')
+            }
+        },
+
+        goToNextQuestion: ({dispatch, state}) => {
+            const currentIndex = getCurrentQuestionIndex(state);
+            dispatch('setCurrentSection', {section: 'question-' + (parseInt(currentIndex) + 1)});
         }
     },
 
     getters: {
         userData      : (state) => state.userData,
+        userId        : (state) => state.userId,
         menu          : (state) => state.menu,
         submenu       : (state) => state.submenu,
         next          : (state) => state.next,
@@ -136,7 +191,11 @@ export default new Vuex.Store({
         cardText      : (state) => state.cardText,
         cardTitle     : (state) => state.cardTitle,
         cardImage     : (state) => state.cardImage,
+        cardAnswerType: (state) => state.cardAnswerType,
+        cardChoices   : (state) => state.cardChoices,
+        cardQuestion  : (state) => state.cardQuestion,
         currentSection: (state) => state.currentSection,
-        historic      : (state) => state.historic
+        historic      : (state) => state.historic,
+        contentDelay  : (state) => state.contentDelay
     }
 })
