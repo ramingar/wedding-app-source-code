@@ -1,28 +1,28 @@
 <template>
     <div>
-        <template v-if="'radio' === choiceType" v-for="choice in choices">
+        <div v-if="'radio' === choiceType" v-for="choice in choices" :key="choice.id">
             <label class="flex flex-wrap w-100 pa2 pv3-ns">
                 <input type="radio"
                        :value="choice.id + '||' + choice.choice"
                        v-model="answerRadio">
                 <span class="ml2">{{choice.choice}}</span>
             </label>
-        </template>
+        </div>
 
-        <template v-if="'checkbox' === choiceType" v-for="choice in choices">
+        <div v-if="'checkbox' === choiceType" v-for="choice in choices" :key="choice.id">
             <label class="flex flex-wrap w-100 pa2 pv3-ns">
                 <input type="checkbox"
                        :value="choice.id + '||' + choice.choice"
                        v-model="answerCheckbox">
                 <span class="ml2">{{choice.choice}}</span>
             </label>
-        </template>
+        </div>
 
-        <template v-if="'textarea' === choiceType">
+        <div v-if="'textarea' === choiceType">
             <label class="flex flex-wrap w-100 pa2 pv3-ns">
                 <textarea v-model="answerTextarea" placeholder="Escribe aquí..."></textarea>
             </label>
-        </template>
+        </div>
 
         <div class="dn">{{computedSection}}</div>
     </div>
@@ -31,6 +31,7 @@
 <script>
     import {mapGetters, mapActions} from 'vuex'
     import axios from 'axios'
+    import _ from 'lodash'
 
     const getQuestionIndex = (question) => {
         return question.split('-')[1];
@@ -69,7 +70,8 @@
                         .then((res) => {
                             if (200 === res.status) this.setUserData({userData});
                         })
-                        .catch(err => console.log(err))
+                        .catch(err => {
+                        })
                     ;
                 }
             }
