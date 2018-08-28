@@ -68,8 +68,8 @@
                 'cardAnswerType', 'cardChoices', 'cardQuestion', 'userData', 'currentSection', 'contentDelay', 'userId'
             ]),
             ...mapActions(['setUserData']),
-            debouncedSave: _.debounce((self, newValue) => {
-                self.saveUserData(newValue)
+            debouncedSave: _.debounce((self, newValue, questionIndex) => {
+                self.saveUserData(newValue, questionIndex)
             }, 1000)
         },
 
@@ -80,10 +80,9 @@
                 answerTextarea: [],
                 choices       : [],
                 choiceType    : '',
-                saveUserData  : (newValue) => {
-                    const userId        = this.userId();
-                    const userData      = this.userData();
-                    const questionIndex = getQuestionIndex(this.currentSection());
+                saveUserData  : (newValue, questionIndex) => {
+                    const userId   = this.userId();
+                    const userData = this.userData();
 
                     userData.answers[questionIndex] = newValue;
 
@@ -108,13 +107,13 @@
 
         watch: {
             answerRadio(newValue) {
-                this.saveUserData(newValue)
+                this.saveUserData(newValue, getQuestionIndex(this.currentSection()))
             },
             answerCheckbox(newValue) {
-                this.saveUserData(newValue)
+                this.saveUserData(newValue, getQuestionIndex(this.currentSection()))
             },
             answerTextarea(newValue) {
-                this.debouncedSave(this, newValue)
+                this.debouncedSave(this, newValue, getQuestionIndex(this.currentSection()))
             },
             computedSection() {
                 updateAnswers(this)
