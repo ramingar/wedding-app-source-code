@@ -9,9 +9,7 @@
                 <a @click="changeSectionTo('question-0')"
                    :class="startButtonClasses"
                    class="relative link dim br-pill ba ph3 pv2 mb2 dark-green pointer mt3">Empezar con las preguntas
-                    </a>
                 </a>
-
             </div>
         </template>
 
