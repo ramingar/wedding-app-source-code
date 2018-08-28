@@ -40,7 +40,7 @@ export default new Vuex.Store({
         cardAnswerType: sectionsStore.loading.answerType,
         cardChoices   : sectionsStore.loading.choices,
         cardQuestion  : sectionsStore.loading.question,
-        contentDelay  : 400
+        contentDelay  : 200
     },
 
     mutations: {

@@ -23,8 +23,6 @@
                 <textarea v-model="answerTextarea" placeholder="Escribe aquí..."></textarea>
             </label>
         </div>
-
-        <div class="dn">{{computedSection}}</div>
     </div>
 </template>
 
@@ -35,6 +33,31 @@
 
     const getQuestionIndex = (question) => {
         return question.split('-')[1];
+    };
+
+    const updateAnswers = (self) => {
+        setTimeout(() => {
+            self.choices     = self.cardChoices();
+            self.choiceType  = self.cardAnswerType();
+            const answerType = self.cardAnswerType();
+
+            const ucFirst = text =>
+                text.split('')
+                    .map((val, idx) => idx > 0 ? val.toLowerCase() : val.toUpperCase())
+                    .join('');
+
+            const NOTHING_ANSWERS = {
+                'radio'   : '',
+                'checkbox': [],
+                'textarea': ''
+            };
+
+            const NOTHING       = NOTHING_ANSWERS[answerType];
+            const questionIndex = getQuestionIndex(self.currentSection());
+
+            self['answer' + ucFirst(answerType)] = self.userData().answers[questionIndex] || NOTHING;
+
+        }, self.contentDelay());
     };
 
     export default {
@@ -56,7 +79,6 @@
                 answerCheckbox: [],
                 answerTextarea: [],
                 choices       : [],
-                section       : '',
                 choiceType    : '',
                 saveUserData  : (newValue) => {
                     const userId        = this.userId();
@@ -70,57 +92,33 @@
                         .then((res) => {
                             if (200 === res.status) this.setUserData({userData});
                         })
-                        .catch(err => {
-                        })
+                        .catch()
                     ;
                 }
             }
         },
 
         computed: {
-            computedSection() {
-                this.section = this.currentSection();
-            }
+            ...mapGetters({computedSection: 'currentSection'})
+        },
+
+        created() {
+            updateAnswers(this)
         },
 
         watch: {
-            answerRadio(newValue, oldValue) {
+            answerRadio(newValue) {
                 this.saveUserData(newValue)
             },
-            answerCheckbox(newValue, oldValue) {
+            answerCheckbox(newValue) {
                 this.saveUserData(newValue)
             },
-            answerTextarea(newValue, oldValue) {
+            answerTextarea(newValue) {
                 this.debouncedSave(this, newValue)
             },
-            section(newValue) {
-                setTimeout(() => {
-                    this.choices     = this.cardChoices();
-                    this.choiceType  = this.cardAnswerType();
-                    const answerType = this.cardAnswerType();
-
-                    const ucFirst = text =>
-                        text.split('')
-                            .map((val, idx) => idx > 0 ? val.toLowerCase() : val.toUpperCase())
-                            .join('');
-
-                    const NOTHING_ANSWERS = {
-                        'radio'   : '',
-                        'checkbox': [],
-                        'textarea': ''
-                    };
-
-                    const NOTHING       = NOTHING_ANSWERS[answerType];
-                    const questionIndex = getQuestionIndex(this.currentSection());
-
-                    this['answer' + ucFirst(answerType)] = this.userData().answers[questionIndex] || NOTHING;
-
-                }, this.contentDelay());
+            computedSection() {
+                updateAnswers(this)
             }
         }
     }
 </script>
-
-<style scoped>
-
-</style>
