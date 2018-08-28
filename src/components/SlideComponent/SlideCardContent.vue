@@ -1,14 +1,21 @@
 <template>
-    <div>
+    <div :class="{'h-100': 'textarea' === choiceType}" class="w-100">
         <!-- STATIC PAGES ------------------------------------------------------ -->
-        <p class="kbreindeergames f4 _f2-hd _f2-fullhd tc">{{ title }}</p>
-        <span v-html="text"></span>
-        <button @click="changeSectionTo('question-0')"
-                :class="startButtonClasses">Empezar con las preguntas
-        </button>
+        <template v-if="!loadAnswersComponent">
+            <span class="kbreindeergames db mb3 f4 _f2-hd _f2-fullhd tc">{{ title }}</span>
+            <span v-html="text"></span>
+            <br>
+            <div class="db tc">
+                <a @click="changeSectionTo('question-0')"
+                   :class="startButtonClasses"
+                   class="relative link dim br-pill ba ph3 pv2 mb2 dark-green pointer mt3">Empezar con las preguntas
+                </a>
+            </div>
+        </template>
 
         <!-- QUESTION CARDS ---------------------------------------------------- -->
-        <component v-bind:is="loadAnswersComponent"/>
+        <component :class="{'h-100': 'textarea' === choiceType}" v-if="loadAnswersComponent"
+                   v-bind:is="loadAnswersComponent"/>
 
     </div>
 </template>
@@ -20,9 +27,10 @@
     const updateCard = (self) => {
         self.loaded = false;
         setTimeout(() => {
-            self.title  = self.cardTitle();
-            self.text   = self.cardText();
-            self.loaded = true;
+            self.title      = self.cardTitle();
+            self.text       = self.cardText();
+            self.choiceType = self.cardAnswerType();
+            self.loaded     = true;
         }, self.contentDelay());
     };
 
@@ -30,7 +38,7 @@
         name: "SlideCardContent",
 
         methods: {
-            ...mapGetters(['cardText', 'cardTitle', 'currentSection', 'userData', 'contentDelay']),
+            ...mapGetters(['cardText', 'cardTitle', 'cardAnswerType', 'currentSection', 'userData', 'contentDelay']),
             ...mapActions(['setCurrentSection']),
             changeSectionTo: function (section) {
                 this.setCurrentSection({section});
@@ -43,9 +51,10 @@
 
         data() {
             return {
-                title : '',
-                text  : '',
-                loaded: false,
+                title     : '',
+                text      : '',
+                choiceType: '',
+                loaded    : false,
             }
         },
 
