@@ -1,13 +1,13 @@
 <template>
     <div>
         <div v-if="'radio' === choiceType" v-for="choice in choices" :key="choice.id">
-            <label class="flex flex-wrap w-100 pa2 pv3-ns">
+            <label class="flex items-start w-100 pa2 pv3-ns">
                 <img src="../../assets/imgs/radio-unchecked.png"
                      :class="{dn: (choice.id + '||' + choice.choice) === answerRadio}"
-                     class="w1 h1"/>
+                     class="mt1 w1 h1"/>
                 <img src="../../assets/imgs/radio-checked.png"
                      :class="{dn: (choice.id + '||' + choice.choice) !== answerRadio}"
-                     class="w1 h1"/>
+                     class="mt1 w1 h1"/>
                 <input type="radio"
                        :value="choice.id + '||' + choice.choice"
                        v-model="answerRadio"
@@ -17,13 +17,13 @@
         </div>
 
         <div v-if="'checkbox' === choiceType" v-for="choice in choices" :key="choice.id">
-            <label class="flex flex-wrap w-100 pa2 pv3-ns">
+            <label class="flex items-start w-100 pa2 pv3-ns">
                 <img src="../../assets/imgs/check-unchecked.png"
                      :class="{dn: answerCheckbox.indexOf(choice.id + '||' + choice.choice) > -1}"
-                     class="w1 h1"/>
+                     class="mt1 w1 h1"/>
                 <img src="../../assets/imgs/check-checked.png"
                      :class="{dn:  answerCheckbox.indexOf(choice.id + '||' + choice.choice) < 0}"
-                     class="w1 h1"/>
+                     class="mt1 w1 h1"/>
                 <input type="checkbox"
                        :value="choice.id + '||' + choice.choice"
                        v-model="answerCheckbox"
@@ -33,8 +33,10 @@
         </div>
 
         <div v-if="'textarea' === choiceType">
-            <label class="flex flex-wrap w-100 pa2 pv3-ns">
-                <textarea v-model="answerTextarea" placeholder="Escribe aquí..."></textarea>
+            <label class="flex flex-wrap w-100">
+                <textarea v-model="answerTextarea"
+                          class="b--dashed _b--green w5 h4 h5-ns _h5-tablet-portrait"
+                          placeholder="Escribe aquí la respuesta..."></textarea>
             </label>
         </div>
     </div>
@@ -135,3 +137,9 @@
         }
     }
 </script>
+
+<style scoped>
+    ._b--green {
+        border-color: rgba(27, 75, 36, 1);
+    }
+</style>
