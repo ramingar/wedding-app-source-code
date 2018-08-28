@@ -18,9 +18,16 @@
 
         <div v-if="'checkbox' === choiceType" v-for="choice in choices" :key="choice.id">
             <label class="flex flex-wrap w-100 pa2 pv3-ns">
+                <img src="../../assets/imgs/check-unchecked.png"
+                     :class="{dn: answerCheckbox.indexOf(choice.id + '||' + choice.choice) > -1}"
+                     class="w1 h1"/>
+                <img src="../../assets/imgs/check-checked.png"
+                     :class="{dn:  answerCheckbox.indexOf(choice.id + '||' + choice.choice) < 0}"
+                     class="w1 h1"/>
                 <input type="checkbox"
                        :value="choice.id + '||' + choice.choice"
-                       v-model="answerCheckbox">
+                       v-model="answerCheckbox"
+                       class="dn">
                 <span class="ml2">{{choice.choice}}</span>
             </label>
         </div>
