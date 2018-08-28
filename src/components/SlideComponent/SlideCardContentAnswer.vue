@@ -2,9 +2,16 @@
     <div>
         <div v-if="'radio' === choiceType" v-for="choice in choices" :key="choice.id">
             <label class="flex flex-wrap w-100 pa2 pv3-ns">
+                <img src="/img/radio-unchecked.png"
+                     :class="{dn: (choice.id + '||' + choice.choice) === answerRadio}"
+                     class="w1 h1"/>
+                <img src="/img/radio-checked.png"
+                     :class="{dn: (choice.id + '||' + choice.choice) !== answerRadio}"
+                     class="w1 h1"/>
                 <input type="radio"
                        :value="choice.id + '||' + choice.choice"
-                       v-model="answerRadio">
+                       v-model="answerRadio"
+                       class="dn">
                 <span class="ml2">{{choice.choice}}</span>
             </label>
         </div>
