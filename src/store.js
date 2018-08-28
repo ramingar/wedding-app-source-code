@@ -5,6 +5,24 @@ import sectionsStore from './sectionStore'
 
 Vue.use(Vuex);
 
+const getSection = (state) => {
+    return state.historic.length > 0 ? state.historic[state.historic.length - 1] : 'default'
+};
+
+const getCurrentQuestionIndex = (state) => {
+    return state.currentSection.split('-')[1];
+};
+
+const areMoreQuestions = (state) => {
+    const currentIndex = getCurrentQuestionIndex(state);
+    const questions    = state.userData.questions;
+    return currentIndex < (questions.length - 1);
+};
+
+const canNextButtonBeEnabled = (state) => {
+    return state.currentSection.indexOf('question') > -1 && areMoreQuestions(state)
+};
+
 export default new Vuex.Store({
     state: {
         userData      : {},
@@ -131,6 +149,11 @@ export default new Vuex.Store({
                 commit('pushInHistoric', section);
                 dispatch('enablePrevious');
             }
+
+            dispatch('disableNext');
+            if (canNextButtonBeEnabled(state)) {
+                dispatch('enableNext')
+            }
         },
 
         setSections: ({commit}, {sections}) => {
@@ -139,9 +162,22 @@ export default new Vuex.Store({
 
         goToPreviousPage: ({commit, dispatch, state}) => {
             commit('popFromHistoric');  // caution! not immutable
-            const section = state.historic.length > 0 ? state.historic[state.historic.length - 1] : 'default';
+            const section = getSection(state);
             commit('setCurrentSection', section);
-            'default' === section ? dispatch('disablePrevious') : undefined;
+
+            if ('default' === section) {
+                dispatch('disablePrevious')
+            }
+
+            dispatch('disableNext');
+            if (canNextButtonBeEnabled(state)) {
+                dispatch('enableNext')
+            }
+        },
+
+        goToNextQuestion: ({dispatch, state}) => {
+            const currentIndex = getCurrentQuestionIndex(state);
+            dispatch('setCurrentSection', {section: 'question-' + (parseInt(currentIndex) + 1)});
         }
     },
 
