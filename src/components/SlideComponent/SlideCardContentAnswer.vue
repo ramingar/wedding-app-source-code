@@ -29,13 +29,24 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex'
+    import {mapGetters, mapActions} from 'vuex'
+    import axios from 'axios'
+
+    const getQuestionIndex = (question) => {
+        return question.split('-')[1];
+    };
 
     export default {
         name: "slide-card-content-answer",
 
         methods: {
-            ...mapGetters(['cardAnswerType', 'cardChoices', 'cardQuestion', 'userData', 'currentSection', 'contentDelay'])
+            ...mapGetters([
+                'cardAnswerType', 'cardChoices', 'cardQuestion', 'userData', 'currentSection', 'contentDelay', 'userId'
+            ]),
+            ...mapActions(['setUserData']),
+            debouncedSave: _.debounce((self, newValue) => {
+                self.saveUserData(newValue)
+            }, 1000)
         },
 
         data() {
@@ -45,7 +56,22 @@
                 answerTextarea: [],
                 choices       : [],
                 section       : '',
-                choiceType    : ''
+                choiceType    : '',
+                saveUserData  : (newValue) => {
+                    const userId        = this.userId();
+                    const userData      = this.userData();
+                    const questionIndex = getQuestionIndex(this.currentSection());
+
+                    userData.answers[questionIndex] = newValue;
+
+                    axios
+                        .put(`/users/${userId}.json`, userData)
+                        .then((res) => {
+                            if (200 === res.status) this.setUserData({userData});
+                        })
+                        .catch(err => console.log(err))
+                    ;
+                }
             }
         },
 
@@ -57,13 +83,13 @@
 
         watch: {
             answerRadio(newValue, oldValue) {
-                console.log(newValue);
+                this.saveUserData(newValue)
             },
             answerCheckbox(newValue, oldValue) {
-                console.log(newValue);
+                this.saveUserData(newValue)
             },
             answerTextarea(newValue, oldValue) {
-                console.log(newValue);
+                this.debouncedSave(this, newValue)
             },
             section(newValue) {
                 setTimeout(() => {
@@ -83,7 +109,7 @@
                     };
 
                     const NOTHING       = NOTHING_ANSWERS[answerType];
-                    const questionIndex = this.currentSection().split('-')[1];
+                    const questionIndex = getQuestionIndex(this.currentSection());
 
                     this['answer' + ucFirst(answerType)] = this.userData().answers[questionIndex] || NOTHING;
 
