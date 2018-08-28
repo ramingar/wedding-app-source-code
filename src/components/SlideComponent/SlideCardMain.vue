@@ -4,7 +4,7 @@
         <div :style="image"
              v-if="!question"
              class="bg-center contain _rotate-355 h-100 w-100 mw4 _mw5-hd _mw5-full-hd"></div>
-        <div v-if="question" class="flex items-center justify-center h-100 w-100 pr2">{{question}}</div>
+        <div v-if="question" class="flex items-center justify-center h-100 w-100 pr2" v-html="question"></div>
         <div class="dn">{{computedSection}}</div>
     </div>
 </template>
