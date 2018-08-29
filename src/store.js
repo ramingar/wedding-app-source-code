@@ -35,6 +35,7 @@ export default new Vuex.Store({
         sections      : sectionsStore,
         currentSection: 'loading',
         historic      : [],
+        cardClose     : false,
         cardText      : sectionsStore.loading.text,
         cardTitle     : sectionsStore.loading.title,
         cardImage     : sectionsStore.loading.image,
@@ -62,12 +63,12 @@ export default new Vuex.Store({
             state.submenu = true
         },
 
-        showInfo: (state) => {
-            state.info = true
-        },
-
         hideSubmenu: (state) => {
             state.submenu = false
+        },
+
+        showInfo: (state) => {
+            state.info = true
         },
 
         hideInfo: (state) => {
@@ -94,6 +95,7 @@ export default new Vuex.Store({
             state.cardText  = state.sections[section].text;
             state.cardTitle = state.sections[section].title;
             state.cardImage = state.sections[section].image;
+            state.cardClose = state.sections[section].close || false;
 
             state.cardAnswerType = state.sections[section].answerType;
             state.cardChoices    = state.sections[section].choices;
@@ -132,12 +134,12 @@ export default new Vuex.Store({
             commit('showSubmenu')
         },
 
-        showInfo: ({commit}) => {
-            commit('showInfo')
-        },
-
         hideSubmenu: ({commit}) => {
             commit('hideSubmenu')
+        },
+
+        showInfo: ({commit}) => {
+            commit('showInfo')
         },
 
         hideInfo: ({commit}) => {
@@ -206,6 +208,7 @@ export default new Vuex.Store({
         info          : (state) => state.info,
         next          : (state) => state.next,
         previous      : (state) => state.previous,
+        cardClose     : (state) => state.cardClose,
         cardText      : (state) => state.cardText,
         cardTitle     : (state) => state.cardTitle,
         cardImage     : (state) => state.cardImage,

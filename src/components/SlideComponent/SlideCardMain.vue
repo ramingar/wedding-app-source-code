@@ -1,6 +1,5 @@
 <template>
     <div class="flex flex-column justify-center items-center h-100 w-100">
-        <!--<div class="center background-image h-100 w-100 bg-center cover br--top br4"></div>-->
         <div :style="image"
              v-if="!question"
              class="bg-center contain _rotate-355 h-100 w-100 mw4 _mw5-hd _mw5-full-hd"></div>
