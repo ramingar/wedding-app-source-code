@@ -65,6 +65,14 @@
         padding-right: 2rem;
     }
 
+    ._mt05-mobile-landscape {
+        margin-top: .10rem;
+    }
+
+    ._ml4-mobile-landscape {
+        margin-left: 2rem;
+    }
+
     ._f8-mobile-landscape {
         font-size: .6rem;
     }
@@ -83,10 +91,6 @@
 
     ._no_display-mobile-landscape {
         display: none;
-    }
-
-    ._mt05-landscape {
-        margin-top: .10rem;
     }
 }
 
@@ -123,6 +127,10 @@
 
     ._pr4_50-hd {
         padding-right: 3rem;
+    }
+
+    ._ml4-hd {
+        margin-left: 2rem;
     }
 
     ._mw5-hd {
@@ -190,6 +198,10 @@
 
     ._pr4_50-fullhd {
         padding-right: 3rem;
+    }
+
+    ._ml4-fullhd {
+        margin-left: 2rem;
     }
 
     ._mw5-full-hd {
