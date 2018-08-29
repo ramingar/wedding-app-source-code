@@ -28,11 +28,11 @@
                        :value="choice.id + '||' + choice.choice"
                        v-model="answerCheckbox"
                        class="dn">
-                <span class="ml2 _mt05-landscape">{{choice.choice}}</span>
+                <span class="ml2 _mt05-mobile-landscape">{{choice.choice}}</span>
             </label>
         </div>
 
-        <div v-if="'textarea' === choiceType" class="h-100 ml4">
+        <div v-if="'textarea' === choiceType" class="h-100 _ml4-mobile-landscape _ml4-hd _ml4-fullhd">
             <label class="flex flex-wrap w-100 h-100
                 _h-100-mobile-landscape">
                 <textarea v-model="answerTextarea"
