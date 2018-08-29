@@ -4,10 +4,10 @@
             <label class="flex items-start w-100 pv2">
                 <img src="../../assets/imgs/radio-unchecked.png"
                      :class="{dn: (choice.id + '||' + choice.choice) === answerRadio}"
-                     class="mt1 w1 h1"/>
+                     class="_mt05 w1 h1"/>
                 <img src="../../assets/imgs/radio-checked.png"
                      :class="{dn: (choice.id + '||' + choice.choice) !== answerRadio}"
-                     class="mt1 w1 h1"/>
+                     class="_mt05 w1 h1"/>
                 <input type="radio"
                        :value="choice.id + '||' + choice.choice"
                        v-model="answerRadio"
@@ -20,10 +20,10 @@
             <label class="flex items-start w-100 pv2 ">
                 <img src="../../assets/imgs/check-unchecked.png"
                      :class="{dn: answerCheckbox.indexOf(choice.id + '||' + choice.choice) > -1}"
-                     class="mt1 w1 h1"/>
+                     class="_mt05 w1 h1"/>
                 <img src="../../assets/imgs/check-checked.png"
                      :class="{dn:  answerCheckbox.indexOf(choice.id + '||' + choice.choice) < 0}"
-                     class="mt1 w1 h1"/>
+                     class="_mt05 w1 h1"/>
                 <input type="checkbox"
                        :value="choice.id + '||' + choice.choice"
                        v-model="answerCheckbox"
