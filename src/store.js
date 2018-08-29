@@ -29,6 +29,7 @@ export default new Vuex.Store({
         userId        : '',
         menu          : false,
         submenu       : false,
+        info          : false,
         next          : false,
         previous      : false,
         sections      : sectionsStore,
@@ -61,8 +62,16 @@ export default new Vuex.Store({
             state.submenu = true
         },
 
+        showInfo: (state) => {
+            state.info = true
+        },
+
         hideSubmenu: (state) => {
             state.submenu = false
+        },
+
+        hideInfo: (state) => {
+            state.info = false
         },
 
         enableNext: (state) => {
@@ -123,8 +132,16 @@ export default new Vuex.Store({
             commit('showSubmenu')
         },
 
+        showInfo: ({commit}) => {
+            commit('showInfo')
+        },
+
         hideSubmenu: ({commit}) => {
             commit('hideSubmenu')
+        },
+
+        hideInfo: ({commit}) => {
+            commit('hideInfo')
         },
 
         enableNext: ({commit}) => {
@@ -186,6 +203,7 @@ export default new Vuex.Store({
         userId        : (state) => state.userId,
         menu          : (state) => state.menu,
         submenu       : (state) => state.submenu,
+        info          : (state) => state.info,
         next          : (state) => state.next,
         previous      : (state) => state.previous,
         cardText      : (state) => state.cardText,

@@ -72,6 +72,14 @@
     ._items-center-mobile-landscape {
         align-items: center;
     }
+
+    ._display-mobile-landscape {
+        display: block;
+    }
+
+    ._no_display-mobile-landscape {
+        display: none;
+    }
 }
 
 @media (min-width: 600px) and (max-width: 75rem) and (min-height: 640px) {
@@ -128,6 +136,14 @@
     ._items-center-hd {
         align-items: center;
     }
+
+    ._display-hd {
+        display: block;
+    }
+
+    ._no_display-hd {
+        display: none;
+    }
 }
 
 @media (min-width: 86rem) and (min-height: 600px) {
@@ -178,5 +194,13 @@
 
     ._items-center-fullhd {
         align-items: center;
+    }
+
+    ._display-fullhd {
+        display: block;
+    }
+
+    ._no_display-fullhd {
+        display: none;
     }
 }
