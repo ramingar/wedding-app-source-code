@@ -42,6 +42,7 @@
         </div>
 
         <div v-if="'onlytext' === choiceType" class="h-100">
+            <p v-html="title" class="kbreindeergames db mb3 f4 _f2-hd _f2-fullhd tc"></p>
             <p v-html="text"></p>
         </div>
     </div>
@@ -59,6 +60,7 @@
     const updateAnswers = (self) => {
         setTimeout(() => {
             self.text        = self.cardText();
+            self.title       = self.cardTitle();
             self.choices     = self.cardChoices();
             self.choiceType  = self.cardAnswerType();
             const answerType = self.cardAnswerType();
@@ -71,7 +73,8 @@
             const NOTHING_ANSWERS = {
                 'radio'   : '',
                 'checkbox': [],
-                'textarea': ''
+                'textarea': '',
+                'onlytext': ''
             };
 
             const NOTHING       = NOTHING_ANSWERS[answerType];
@@ -87,7 +90,7 @@
 
         methods: {
             ...mapGetters([
-                'cardAnswerType', 'cardChoices', 'cardQuestion', 'cardText',
+                'cardAnswerType', 'cardChoices', 'cardQuestion', 'cardText', 'cardTitle',
                 'userData', 'currentSection', 'contentDelay', 'userId'
             ]),
             ...mapActions(['setUserData']),
@@ -104,6 +107,7 @@
                 choices       : [],
                 choiceType    : '',
                 text          : '',
+                title         : '',
                 saveUserData  : (newValue, questionIndex) => {
                     const userId   = this.userId();
                     const userData = this.userData();
