@@ -40,6 +40,10 @@
                           placeholder="Escribe aquí la respuesta..."></textarea>
             </label>
         </div>
+
+        <div v-if="'onlytext' === choiceType" class="h-100">
+            <p v-html="text"></p>
+        </div>
     </div>
 </template>
 
@@ -54,6 +58,7 @@
 
     const updateAnswers = (self) => {
         setTimeout(() => {
+            self.text        = self.cardText();
             self.choices     = self.cardChoices();
             self.choiceType  = self.cardAnswerType();
             const answerType = self.cardAnswerType();
@@ -82,7 +87,8 @@
 
         methods: {
             ...mapGetters([
-                'cardAnswerType', 'cardChoices', 'cardQuestion', 'userData', 'currentSection', 'contentDelay', 'userId'
+                'cardAnswerType', 'cardChoices', 'cardQuestion', 'cardText',
+                'userData', 'currentSection', 'contentDelay', 'userId'
             ]),
             ...mapActions(['setUserData']),
             debouncedSave: _.debounce((self, newValue, questionIndex) => {
@@ -97,6 +103,7 @@
                 answerTextarea: [],
                 choices       : [],
                 choiceType    : '',
+                text          : '',
                 saveUserData  : (newValue, questionIndex) => {
                     const userId   = this.userId();
                     const userData = this.userData();
