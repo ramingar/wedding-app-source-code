@@ -6,7 +6,6 @@
                 class="card-in"/>
         <slide-buttons/>
         <slide-card-blank :class="{'card-in-from-right': cardTransition}" class="card-out-right"/>
-        <div class="dn">section -> {{assignSection}}</div>
     </div>
 </template>
 
@@ -35,8 +34,8 @@
         },
 
         computed: {
-            assignSection() {
-                this.section = this.currentSection()
+            computedSection() {
+                return this.currentSection()
             },
         },
 
@@ -49,7 +48,10 @@
         },
 
         watch: {
-            section: function (newSection, oldSection) {
+            computedSection() {
+                this.section = this.computedSection
+            },
+            section(newSection, oldSection) {
                 if ('' !== oldSection) {
                     this.cardTransition         = this.goingNext();
                     this.cardTransitionPrevious = this.goingPrevious();
@@ -66,6 +68,7 @@
         },
 
         created() {
+            this.section = this.currentSection();
             const userId = this.$router.history.current.params.id;
             axios
                 .get(`/users/${userId}.json`)
