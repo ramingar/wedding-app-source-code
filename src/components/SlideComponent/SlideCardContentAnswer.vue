@@ -1,5 +1,5 @@
 <template>
-    <div :class="{'h-100': 'textarea' === choiceType}">
+    <div :class="{'h-100': 'textarea' === choiceType}" class="ml4">
         <div v-if="'radio' === choiceType" v-for="choice in choices" :key="choice.id">
             <label class="flex items-start w-100 pv2">
                 <img src="../../assets/imgs/radio-unchecked.png"
@@ -20,15 +20,15 @@
             <label class="flex items-start w-100 pv2 ">
                 <img src="../../assets/imgs/check-unchecked.png"
                      :class="{dn: answerCheckbox.indexOf(choice.id + '||' + choice.choice) > -1}"
-                     class="_mt05 w1 h1"/>
+                     class="mt0 w1 h1"/>
                 <img src="../../assets/imgs/check-checked.png"
                      :class="{dn:  answerCheckbox.indexOf(choice.id + '||' + choice.choice) < 0}"
-                     class="_mt05 w1 h1"/>
+                     class="mt0 w1 h1"/>
                 <input type="checkbox"
                        :value="choice.id + '||' + choice.choice"
                        v-model="answerCheckbox"
                        class="dn">
-                <span class="ml2">{{choice.choice}}</span>
+                <span class="ml2 _mt05-landscape">{{choice.choice}}</span>
             </label>
         </div>
 
