@@ -84,6 +84,10 @@
     ._no_display-mobile-landscape {
         display: none;
     }
+
+    ._mt05-landscape {
+        margin-top: .10rem;
+    }
 }
 
 @media (min-width: 600px) and (max-width: 75rem) and (min-height: 640px) {
