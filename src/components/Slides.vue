@@ -1,6 +1,9 @@
 <template>
     <div>
-        <slide-card :class="{'card-out-left-from-center': cardTransition}" class="card-in"/>
+        <slide-card-blank :class="{'card-in-from-left': cardTransitionPrevious}" class="card-out-left"/>
+        <slide-card
+                :class="{'card-out-left-from-center': cardTransition, 'card-out-right-from-center': cardTransitionPrevious}"
+                class="card-in"/>
         <slide-buttons/>
         <slide-card-blank :class="{'card-in-from-right': cardTransition}" class="card-out-right"/>
         <div class="dn">section -> {{assignSection}}</div>
@@ -25,8 +28,9 @@
 
         data() {
             return {
-                section       : '',
-                cardTransition: false
+                section               : '',
+                cardTransition        : false,
+                cardTransitionPrevious: false
             }
         },
 
@@ -37,16 +41,27 @@
         },
 
         methods: {
-            ...mapGetters(['currentSection', 'userData']),
-            ...mapActions(['setUserData', 'setUserId', 'setCurrentSection', 'setSections', 'showMenu'])
+            ...mapGetters(['currentSection', 'userData', 'goingNext', 'goingPrevious', 'contentDelay']),
+            ...mapActions([
+                'setUserData', 'setUserId', 'setCurrentSection', 'setSections', 'showMenu',
+                'setGoingNext', 'setGoingPrevious'
+            ])
         },
 
         watch: {
             section: function (newSection, oldSection) {
-                '' !== oldSection ? this.cardTransition = true : null;
+                if ('' !== oldSection) {
+                    this.cardTransition         = this.goingNext();
+                    this.cardTransitionPrevious = this.goingPrevious();
+                }
+
                 setTimeout(() => {
-                    this.cardTransition = false;
-                }, 500);
+                    this.cardTransition         = false;
+                    this.cardTransitionPrevious = false;
+
+                    this.setGoingNext({value: false});
+                    this.setGoingPrevious({value: false});
+                }, this.contentDelay());
             }
         },
 
@@ -89,6 +104,10 @@
         transform: translateX(200%);
     }
 
+    .card-out-left {
+        transform: translateX(-200%);
+    }
+
     .card-in {
         transform: translateX(0);
     }
@@ -101,11 +120,27 @@
         animation-duration: .4s;
     }
 
+    .card-out-right-from-center {
+        -webkit-animation-name: cardOutRightFromCenter;
+        -moz-animation-name: cardOutRightFromCenter;
+        -o-animation-name: cardOutRightFromCenter;
+        animation-name: cardOutRightFromCenter;
+        animation-duration: .4s;
+    }
+
     .card-in-from-right {
         -webkit-animation-name: cardInFromRight;
         -moz-animation-name: cardInFromRight;
         -o-animation-name: cardInFromRight;
         animation-name: cardInFromRight;
+        animation-duration: .4s;
+    }
+
+    .card-in-from-left {
+        -webkit-animation-name: cardInFromLeft;
+        -moz-animation-name: cardInFromLeft;
+        -o-animation-name: cardInFromLeft;
+        animation-name: cardInFromLeft;
         animation-duration: .4s;
     }
 
@@ -124,6 +159,24 @@
         }
         100% {
             transform: translateX(-200%);
+        }
+    }
+
+    @keyframes cardInFromLeft {
+        0% {
+            transform: translateX(-200%);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes cardOutRightFromCenter {
+        0% {
+            transform: translateX(0%);
+        }
+        100% {
+            transform: translateX(200%);
         }
     }
 

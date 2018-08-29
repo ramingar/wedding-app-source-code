@@ -42,7 +42,9 @@ export default new Vuex.Store({
         cardAnswerType: sectionsStore.loading.answerType,
         cardChoices   : sectionsStore.loading.choices,
         cardQuestion  : sectionsStore.loading.question,
-        contentDelay  : 200
+        contentDelay  : 200,
+        goingNext     : false,
+        goingPrevious : false
     },
 
     mutations: {
@@ -114,6 +116,14 @@ export default new Vuex.Store({
 
         popFromHistoric: (state) => {
             state.historic = state.historic.filter((val, index, arr) => index < arr.length - 1 ? val : undefined)
+        },
+
+        setGoingNext: (state, value) => {
+            state.goingNext = value
+        },
+
+        setGoingPrevious: (state, value) => {
+            state.goingPrevious = value
         }
     },
 
@@ -165,6 +175,7 @@ export default new Vuex.Store({
         setCurrentSection: ({commit, dispatch, state}, {section, addToHistoric = true}) => {
             commit('setCurrentSection', section);
             if (addToHistoric) {
+                dispatch('setGoingNext', {value: true});
                 commit('pushInHistoric', section);
                 dispatch('enablePrevious');
             }
@@ -180,6 +191,7 @@ export default new Vuex.Store({
         },
 
         goToPreviousPage: ({commit, dispatch, state}) => {
+            dispatch('setGoingPrevious', {value: true});
             commit('popFromHistoric');  // caution! not immutable
             const section = getSection(state);
             commit('setCurrentSection', section);
@@ -197,6 +209,14 @@ export default new Vuex.Store({
         goToNextQuestion: ({dispatch, state}) => {
             const currentIndex = getCurrentQuestionIndex(state);
             dispatch('setCurrentSection', {section: 'question-' + (parseInt(currentIndex) + 1)});
+        },
+
+        setGoingNext: ({commit}, {value}) => {
+            commit('setGoingNext', value)
+        },
+
+        setGoingPrevious: ({commit}, {value}) => {
+            commit('setGoingPrevious', value)
         }
     },
 
@@ -217,6 +237,8 @@ export default new Vuex.Store({
         cardQuestion  : (state) => state.cardQuestion,
         currentSection: (state) => state.currentSection,
         historic      : (state) => state.historic,
-        contentDelay  : (state) => state.contentDelay
+        contentDelay  : (state) => state.contentDelay,
+        goingNext     : (state) => state.goingNext,
+        goingPrevious : (state) => state.goingPrevious
     }
 })
