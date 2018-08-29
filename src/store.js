@@ -174,8 +174,9 @@ export default new Vuex.Store({
 
         setCurrentSection: ({commit, dispatch, state}, {section, addToHistoric = true}) => {
             commit('setCurrentSection', section);
+            dispatch('setGoingNext', {value: true});
+
             if (addToHistoric) {
-                dispatch('setGoingNext', {value: true});
                 commit('pushInHistoric', section);
                 dispatch('enablePrevious');
             }
