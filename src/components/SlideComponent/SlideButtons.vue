@@ -2,7 +2,7 @@
     <div>
         <div :class="menuClasses"
              class="fixed top-0 right-0 f2 w2 h2 ma1 button">
-            <span class="db info"></span>
+            <span @click="toggleInfo" class="db info"></span>
         </div>
 
         <div id="curtain"
@@ -54,6 +54,22 @@
                 <span class="db contact"></span>
             </button>
         </div>
+
+        <div id="curtain2"
+             @click="hideCurtainInfo"
+             :class="curtain2Classes"
+             class="transition-fast absolute absolute--fill _h0 _w0 o-0"
+             style="background-color: rgb(31, 57, 37);">
+        </div>
+
+        <div :class="infoClasses" class="transition-fast fixed absolute--fill ma3">
+            <div @click="hideCurtainInfo"
+                 class="bg-center contain dn db-ns _display-fullhd _display-hd _display-mobile-landscape w-100 h-100"
+                 style="background-image: url(/img/cards/info-horizontal.jpg)"></div>
+            <div @click="hideCurtainInfo"
+                 class="bg-center contain dn-ns _no_display-fullhd _no_display-hd _no_display-mobile-landscape h-100 w-100"
+                 style="background-image: url(/img/cards/info-vertical.jpg)"></div>
+        </div>
     </div>
 </template>
 
@@ -64,13 +80,22 @@
         name: "SlideButtons",
 
         methods: {
-            ...mapGetters(['menu', 'submenu', 'next', 'previous', 'currentSection']),
-            ...mapActions(['hideSubmenu', 'showSubmenu', 'setCurrentSection', 'goToPreviousPage', 'goToNextQuestion']),
+            ...mapGetters(['menu', 'submenu', 'info', 'next', 'previous', 'currentSection']),
+            ...mapActions([
+                'hideSubmenu', 'showSubmenu', 'hideInfo', 'showInfo',
+                'setCurrentSection', 'goToPreviousPage', 'goToNextQuestion'
+            ]),
             hideMenu() {
                 this.hideSubmenu()
             },
+            hideCurtainInfo() {
+                this.hideInfo()
+            },
             toggleMenu() {
                 this.submenu() ? this.hideSubmenu() : this.showSubmenu()
+            },
+            toggleInfo() {
+                this.info() ? this.hideInfo() : this.showInfo()
             },
             changeSectionTo(section) {
                 this.setCurrentSection({section})
@@ -87,6 +112,17 @@
             curtainClasses() {
                 return {
                     displayed: this.submenu()
+                }
+            },
+            curtain2Classes() {
+                return {
+                    displayed: this.info()
+                }
+            },
+            infoClasses() {
+                return {
+                    db: this.info(),
+                    dn: !this.info()
                 }
             },
             menuClasses() {
@@ -125,7 +161,7 @@
     }
 
     /* used by Vue in a computed variable */
-    #curtain.displayed {
+    .displayed {
         height: 100%;
         width: 100%;
         opacity: .8;

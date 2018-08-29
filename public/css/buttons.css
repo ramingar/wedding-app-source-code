@@ -4,6 +4,10 @@
     cursor: default;
 }
 
+.button.button-hidden {
+    display: none;
+}
+
 .button {
     color: black;
 }
